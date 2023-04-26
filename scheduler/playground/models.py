@@ -13,4 +13,3 @@ class Event(models.Model):
     end_time = models.TimeField()
 
 
-
