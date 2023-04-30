@@ -1,0 +1,13 @@
+{% block content %}
+<body>
+  <h1>Home</h1>
+
+  <button hx-get="{% url 'add_task' %}" hx-target="#dialog">
+    Add a task
+  </button>
+  
+  <div id="modal" class="modal fade">
+    <div id="dialog" class="modal-dialog" hx-target="this"></div>
+  </div>
+</body>
+{% endblock %}
