@@ -1,3 +1,6 @@
+
+#Maybe renaime the fail instead of sevice.py to something like database.py, so that we in a later point still know what thsi file is 
+# actually doing
 from .models import Event
 
 def add_event(name, event_type, date, start_time, end_time, repetition):
