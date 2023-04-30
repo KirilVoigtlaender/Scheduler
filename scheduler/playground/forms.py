@@ -1,10 +1,12 @@
 from django import forms
-from .models import Event
 
 
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-from bootstrap_modal_forms.mixins import PopRequestMixin, CreateUpdateAjaxMixin
+
+#from django.contrib.auth.forms import UserCreationForm
+#from django.contrib.auth.models import User
+#from bootstrap_modal_forms.mixins import PopRequestMixin, CreateUpdateAjaxMixin
+
+from .models import Task,Appointment
 
 class TableForm(forms.Form):
     task_name = forms.CharField (label = 'Add Task')
@@ -22,9 +24,12 @@ class TableForm(forms.Form):
 
 class AddTaskForm(forms.ModelForm):
     class Meta:
-        model=Event
-        fields= ['name', 'date', 'start_time', 'end_time', 'repetition']
+        model=Task
+        fields= ['name', 'expected_time', 'date', 'importancy_level']
 
-
+class AddAppointmentForm(forms.ModelForm):
+    class Meta:
+        model= Appointment
+        fields = ['name', 'start_time','end_time', 'date','repetition']
         
 
