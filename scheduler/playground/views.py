@@ -75,7 +75,7 @@ def edit_task(request, pk):
             })
         else:
             form = AddTaskForm(instance=task)
-        return render(request, 'movie_form.html', {
+        return render(request, 'task_form.html', {
         'form': form,
         'task': task,
     })
@@ -97,7 +97,7 @@ def edit_appointment(request, pk):
             )
          else:
              form = AddAppointmentForm(instance=appointment)
-             return render(request, 'movie_form.html', {
+             return render(request, 'appointment_form.html', {
         'form': form,
         'appointment': appointment,
     })
