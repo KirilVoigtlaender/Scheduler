@@ -1,39 +1,77 @@
+#These are the functions for the database, which is programmed in models
 
-#Maybe renaime the fail instead of sevice.py to something like database.py, so that we in a later point still know what thsi file is 
-# actually doing
-from .models import Event
+from .models import Task, Appointment
 
-def add_event(name, event_type, date, start_time, end_time, repetition):
-    return Event.objects.create(name=name, event_type=event_type, date=date, start_time=start_time, end_time=end_time, repetition=repetition)
+def add_task(name, expected_time, date, importancy_level):
+    return Task.objects.create(name=name, date=date, expected_time=expected_time, importancy_level=importancy_level)
 
-def delete_event(event_id):
+def add_appointment(name,start_time, end_time, date, repetition ):
+    return Appointment.objects.create(name = name, start_time=start_time, end_time=end_time, repetition=repetition)
+
+def delete_task(task_id):
     try:
-        event = Event.objects.get(pk=event_id)
-        event.delete()
+        task = Task.objects.get(pk=task_id)
+        task.delete()
         return True
-    except Event.DoesNotExist:
+    except Task.DoesNotExist:
+        return False
+
+def delete_appointment(appointment_id):
+    try:
+        appointment = Appointment.objects.get(pk=appointment_id)
+        appointment.delete()
+        return True
+    except Appointment.DoesNotExist:
         return False
     
-def update_event(event_id, name, event_type, date, start_time, end_time, repetition):
+def update_task(task_id, name=None, expected_time=None, date=None, importancy_level=None):
     try:
-        event = Event.objects.get(pk=event_id)
-    except Event.DoesNotExist:
+        task = Task.objects.get(pk=task_id)
+    except Task.DoesNotExist:
         return None
     if name:
-        event.name=name
-    if event_type:
-        event.event_type=event_type
+        task.name=name
     if date:
-        event.date=date
+        task.date=date
+    if expected_time:
+        task.expected_time=expected_time
+    if importancy_level: 
+        task.importancy_level=importancy_level
+
+    task.save()
+    return task
+
+def update_appointment(appointment_id, name=None, start_time=None, end_time=None, date=None, repetition=None):
+    try:
+        appointment = Appointment.objects.get(pk = appointment_id)
+    except Appointment.DoesNotExist:
+        return None
+    if name:
+        appointment.name=name
+    if date:
+        appointment.date=date
     if start_time:
-        event.start_time=start_time
+        appointment.start_time=start_time
     if end_time: 
-        event.end_time=end_time
+        appointment.end_time=end_time
     if repetition:
-        event.repetition=repetition
+        appointment.repetition = repetition
+    if date:
+        appointment.date = date
+        
+    appointment.save()
+    return appointment
+        
+def get_task(task_id):
+    try:
+        task = Task.objects.get(pk=task_id)
+    except Task.DoesNotExist:
+        return None
+    return task.name, task.expected_time , task.date, task.importancy_level
 
-    event.save()
-    return event
-
-def get_event(event_id, name, event_type, date, start_time, end_time, repetition):
-    return event_id, name, event_type, date, start_time, end_time, repetition
+def get_appointment(appointment_id):
+    try:
+        appointment = Appointment.objects.get(pk = appointment_id)
+    except Appointment.DoesNotExist:
+        return None
+    return appointment.name, appointment.start_time,appointment.end_time,appointment.date,appointment.repetition
