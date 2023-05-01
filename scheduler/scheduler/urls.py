@@ -16,8 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from playground import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('playground/', include('playground.urls'))
+    #path('admin/', admin.site.urls),
+    #path('playground/', include('playground.urls'))
+    path('',views.index),
+    path('task', views.task_list, name='task_list'),#Task
+    path('appointment', views.appointment_list, name='appointment_list'),#Appointment
+    path('task/add', views.add_task, name='add_task'),#Task
+    path('appointment/add', views.add_appointment, name='add_appointment'),#Appointment
+    path('task/<int:pk>/remove', views.remove_task, name='remove_task'),#Task
+    path('appointment/<int:pk>/remove', views.remove_appointment, name='remove_appointment'),#Appointment
+    path('task/<int:pk>/edit', views.edit_task, name='edit_task'),#Task
+    path('appointment/<int:pk>/edit', views.edit_appointment, name='edit_appointment'),#Appointmnet
 ]

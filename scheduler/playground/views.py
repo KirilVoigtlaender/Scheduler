@@ -15,12 +15,13 @@ def say_hello(request):
 
 def index(request):
     #main view with the button
-    return render(request, 'playground/base.html')#The same as his index.html
+    return render(request, 'index.html')#The same as his index.html
 #Don't know if we need this function for now
 def home(request):
-    return render(request, 'playground/home.html')
+    return render(request, 'home.html')
 
 def add_task(request):
+    form = AddTaskForm()
     if request.method == "POST":
         form = AddTaskForm(request.POST)
         if form.is_valid():
@@ -29,18 +30,20 @@ def add_task(request):
                 status=204,
                 headers={
                     'HX-Trigger': json.dumps({
+                        "TaskListChanged":None,
                         "showMessage": f"{task.name} added."
                     })
                 })
         else:
             form = AddTaskForm()
-    return render(request, 'task_form.html', {
-        'form': form,
+    return render(request,'task_form.html', {
+                'form': form,
     })
             
 
 def add_appointment(request):
     #when add_appontment button get clicked
+    form = AddAppointmentForm()
     if request.method == "POST":
         form = AddAppointmentForm(request.POST)
         if form.is_valid():
@@ -49,7 +52,7 @@ def add_appointment(request):
                 status = 204,
                 headers={
                      'HX-Trigger': json.dumps({
-                        "movieListChanged": None,
+                        "AppointmentListChanged": None,
                         "showMessage": f"{appointment.name} added."
                     })
                 })
@@ -90,7 +93,7 @@ def edit_appointment(request, pk):
                 status=204,
                 headers={
                     'HX-Trigger': json.dumps({
-                        "movieListChanged": None,
+                        "AppointmentListChanged": None,
                         "showMessage": f"{appointment.name} updated."
                     })
                 }

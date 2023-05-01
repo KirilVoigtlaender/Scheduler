@@ -1,0 +1,11 @@
+{% for task in task_list %}
+<tr id="task-{{ task.pk }}" class="task-row">
+  <td>{{ task.name }}</td>
+  <td>{{ task.expected_time }}</td>
+  <td>{{ task.date }}</td>
+  <td>{{ task.importancy_level }}</td>
+  <td>
+    <button class="btn btn-primary btn-sm" hx-get="{% url 'edit_task' pk=task.pk %}" hx-target="#dialog">Edit</button>
+  </td>
+</tr>
+{% endfor %}

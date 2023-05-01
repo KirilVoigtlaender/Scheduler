@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
+
+    <title>Scheduler</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="px-5 my-5 text-center">
+        <h1>Edit Schedule</h1>
+        <p>A sample project that shows how to support modal forms with Django+HTMX with minimal JavaScript code.</p>
+      </div>
+      <table class="table task ">
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>expected_time</th>
+            <th>date</th>
+            <th>importancy_level</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody hx-trigger="load, TaskListChanged from:body" hx-get="{% url 'task_list' %}" hx-target="this">
+          <tr>
+            <td class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table appointment">
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>start_time</th>
+            <th>end_time</th>
+            <th>date</th>
+            <th>repetition</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody hx-trigger="load, AppointmentListChanged from:body" hx-get="{% url 'appointment_list' %}" hx-target="this">
+          <tr>
+            <td class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button hx-get="{% url 'add_task' %}" hx-target="#dialog" class="btn btn-primary">
+        Add a task
+      </button>
+      <button hx-get="{% url 'add_appointment' %}" hx-target="#dialog" class="btn btn-primary">
+        Add an appointment
+      </button>
+    </div>
+
+    <!-- Placeholder for the modal -->
+    <div id="modal" class="modal fade">
+      <div id="dialog" class="modal-dialog" hx-target="this"></div>
+    </div>
+
+    <!-- Empty toast to show the message -->
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+      <div id="toast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div id="toast-body" class="toast-body"></div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Scripts: Bootstraps, HTMX, and custom JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.6.1/dist/htmx.min.js"></script>
+    <script src="{% static "dialog.js" %}"></script>
+    <script src="{% static "toast.js" %}"></script>
+  </body>
+</html>

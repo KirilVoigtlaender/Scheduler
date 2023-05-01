@@ -1,0 +1,12 @@
+{% for appointment in appointment_list %}
+<tr id="appointment-{{ appointment.pk }}" class="appointment-row">
+  <td>{{ appointment.name }}</td>
+  <td>{{ appointment.start_time }}</td>
+  <td>{{ appointment.end_time }}</td>
+  <td>{{ appointment.date }}</td>
+  <td>{{ appointment.repetition}}</td>
+  <td>
+    <button class="btn btn-primary btn-sm" hx-get="{% url 'edit_appointment' pk=appointment.pk %}" hx-target="#dialog">Edit</button>
+  </td>
+</tr>
+{% endfor %}
