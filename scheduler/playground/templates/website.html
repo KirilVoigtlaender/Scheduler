@@ -295,11 +295,27 @@ ul {list-style-type: none;}
 </style>
 <head>
 <body>
-<h1>Schedule Manager</h1>  
+<h1>Schedule Manager</h1> 
 <div class="WeeklyButton">
+
   <ul>
-    <li class="prev">&#10094;</li>
-    <li class="next">&#10095;</li>
+    {% for record in current_records %}
+      <p> {{ forloop.counter }} {{ record.ts_date }}</p>
+    {% endfor %} 
+    <li class="prev">&#10094;
+      <form action="" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="weekrequest" value="last-week">
+        <button type="submit">last week</button>
+    </form>
+    </li>
+    <li class="next">&#10095;
+      <form action="" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="weekrequest" value="next-week">
+        <button type="submit">next week</button>
+    </form>
+    </li>
   </ul>
 </div>
 
@@ -336,8 +352,13 @@ ul {list-style-type: none;}
         <div class="days">
           <div class="day sun">
             <div class="date">
-              <p class="date-day1">Sunday</p>
-              <p class="date-num1">14/07</p>
+              {% if date1 == currentday %}
+                <p class="date-day1">Sunday</p>
+                <p class="date-num1">{{ date1|date:"d-m" }}</p>
+              {% else %}
+                <p class="date-day">Sunday</p>
+                <p class="date-num">{{ date1|date:"d-m" }}</p>
+              {% endif %}
             </div>
             <div class="events">
               {% for x in sunday %}
@@ -350,8 +371,13 @@ ul {list-style-type: none;}
           </div>
           <div class="day mon">
             <div class="date">
-              <p class="date-day">Monday</p>
-              <p class="date-num">15/07</p>
+              {% if date2 == currentday %}
+                <p class="date-day1">Monday</p>
+                <p class="date-num1">{{ date2|date:"d-m" }}</p>
+              {% else %}
+                <p class="date-day">Monday</p>
+                <p class="date-num">{{ date2|date:"d-m" }}</p>
+             {% endif %}
             </div>
             <div class="events">
               {% for x in monday %}
@@ -364,8 +390,13 @@ ul {list-style-type: none;}
           </div>
           <div class="day tue">
             <div class="date">
-              <p class="date-day">Tuesday</p>
-              <p class="date-num">16/07</p>
+              {% if date3 == currentday %}
+                <p class="date-day1">Tuesday</p>
+                <p class="date-num1">{{ date3|date:"d-m" }}</p>
+              {% else %}
+                <p class="date-day">Tuesday</p>
+                <p class="date-num">{{ date3|date:"d-m" }}</p>
+              {% endif %}
             </div>
             <div class="events">
               {% for x in tuesday %}
@@ -378,8 +409,13 @@ ul {list-style-type: none;}
           </div>
           <div class="day wed">
             <div class="date">
-              <p class="date-day">Wednesday</p>
-              <p class="date-num">17/07</p>
+              {% if date4 == currentday %}
+                <p class="date-day1">Wednesday</p>
+                <p class="date-num1">{{ date4|date:"d-m" }}</p>
+              {% else %}
+                <p class="date-day">Wednesday</p>
+                <p class="date-num">{{ date4|date:"d-m" }}</p>
+              {% endif %}
             </div>
             <div class="events">
               {% for x in wednesday %}
@@ -392,8 +428,13 @@ ul {list-style-type: none;}
           </div>
           <div class="day thu">
             <div class="date">
-              <p class="date-day">Thursday</p>
-              <p class="date-num">18/07</p>
+              {% if date5 == currentday %}
+              <p class="date-day1">Thursday</p>
+              <p class="date-num1">{{ date5|date:"d-m" }}</p>
+              {% else %}
+                <p class="date-day">Thursday</p>
+                <p class="date-num">{{ date5|date:"d-m" }}</p>
+              {% endif %}
             </div>
             <div class="events">
               {% for x in thursday %}
@@ -406,8 +447,13 @@ ul {list-style-type: none;}
         </div>
           <div class="day fri">
             <div class="date">
-              <p class="date-day">Friday</p>
-              <p class="date-num">19/07</p>
+              {% if date6 == currentday %}
+                <p class="date-day1">Friday</p>
+                <p class="date-num1">{{ date6|date:"d-m" }}</p>
+              {% else %}
+                <p class="date-day">Friday</p>
+                <p class="date-num">{{ date6|date:"d-m" }}</p>
+              {% endif %}
             </div>
             <div class="events">
               {% for x in friday %}
@@ -420,8 +466,14 @@ ul {list-style-type: none;}
         </div>
           <div class="day sat">
             <div class="date">
-              <p class="date-day">Saturday</p>
-              <p class="date-num">20/07</p>
+              {% if date7 == currentday %}
+                <p class="date-day1">Saturday</p>
+                <p class="date-num1">{{ date7|date:"d-m" }}</p>
+              {% else %}
+                <p class="date-day">Saturday</p>
+                <p class="date-num">{{ date7|date:"d-m" }}</p>
+              {% endif %}
+
             </div>
             <div class="events">
               {% for x in saturday %}

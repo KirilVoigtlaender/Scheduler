@@ -2,7 +2,15 @@ from django.db import models
 from django.db.models import Model
 from datetime import date
 
+class TimeRecord(models.Model):
+    ts_date = models.DateTimeField()
 
+    # Other fields
+
+    def get_week(self):
+        return self.ts_date.isocalendar()[1]
+    def get_year(self):
+        return self.ts_date.isocalendar()[0]
 
 
 class Appointment(models.Model):
