@@ -1,5 +1,8 @@
 from django.db import models
 from django.db.models import Model
+from datetime import date
+
+
 
 
 class Appointment(models.Model):

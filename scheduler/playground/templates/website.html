@@ -203,67 +203,102 @@ body {
               <p class="date-num1">14/07</p>
             </div>
             <div class="events">
-              </div>
+              {% for x in sunday %}
+                <div class="event start-10 end-12 corp-fi"> 
+                  <p class="title">{{ x.name }}</p>
+                  <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
+                </div>
+              {% endfor %}
             </div>
+          </div>
           <div class="day mon">
             <div class="date">
               <p class="date-day">Monday</p>
               <p class="date-num">15/07</p>
             </div>
             <div class="events">
-              </div>
+              {% for x in monday %}
+                <div class="event start-10 end-12 corp-fi"> 
+                  <p class="title">{{ x.name }}</p>
+                  <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
+                </div>
+              {% endfor %}
             </div>
+          </div>
           <div class="day tue">
             <div class="date">
               <p class="date-day">Tuesday</p>
               <p class="date-num">16/07</p>
             </div>
             <div class="events">
-              </div>
+              {% for x in tuesday %}
+                <div class="event start-10 end-12 corp-fi"> 
+                  <p class="title">{{ x.name }}</p>
+                  <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
+                </div>
+              {% endfor %}
             </div>
+          </div>
           <div class="day wed">
             <div class="date">
               <p class="date-day">Wednesday</p>
               <p class="date-num">17/07</p>
             </div>
             <div class="events">
-              </div>
+              {% for x in wednesday %}
+                <div class="event start-10 end-12 corp-fi"> 
+                  <p class="title">{{ x.name }}</p>
+                  <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
+                </div>
+              {% endfor %}
             </div>
+          </div>
           <div class="day thu">
             <div class="date">
               <p class="date-day">Thursday</p>
               <p class="date-num">18/07</p>
             </div>
             <div class="events">
-            </div>
+              {% for x in thursday %}
+                <div class="event start-10 end-12 corp-fi"> 
+                  <p class="title">{{ x.name }}</p>
+                  <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
+                </div>
+              {% endfor %}
           </div>
+        </div>
           <div class="day fri">
             <div class="date">
               <p class="date-day">Friday</p>
               <p class="date-num">19/07</p>
             </div>
             <div class="events">
-            </div>
+              {% for x in friday %}
+                <div class="event start-10 end-12 corp-fi"> 
+                  <p class="title">{{ x.name }}</p>
+                  <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
+                </div>
+              {% endfor %}
           </div>
+        </div>
           <div class="day sat">
             <div class="date">
               <p class="date-day">Saturday</p>
               <p class="date-num">20/07</p>
             </div>
             <div class="events">
-              {% for x in appointments %}
-                {% if x.date in date %}
-                  <div class="event start-10 end-12 corp-fi"> 
-                    <p class="title">{{ x.name }}</p>
-                    <p class="time">{{ x.start_time }} - {{ x.end_time }}</p>
-                  </div>
-                {% endif %}
+              {% for x in saturday %}
+                <div class="event start-10 end-12 corp-fi"> 
+                  <p class="title">{{ x.name }}</p>
+                  <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
+                </div>
               {% endfor %}
               <!-- <div class="event start-10 end-12 corp-fi">
                 <p class="title">Corporate Finance</p>
                 <p class="time">10 AM - 12 PM</p>
               </div> -->
             </div>
+          </div>
     </div>
   
 </body>
