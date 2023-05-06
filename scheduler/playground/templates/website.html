@@ -2,17 +2,18 @@
 <html>
 <head>
 <style>
+
+
    :root {
   --numDays: 7;
   --numHours: 23;
   --timeHeight: 100px;
   --calBgColor: #ffffff;
   --calBgBorderColor: #000000;
-  --eventBorderColor: #f2d3d8;
-  --eventColor1: #ffd6d1;
-  --eventColor2: #fafaa3;
-  --eventColor3: #e2f8ff;
-  --eventColor4: #d1ffe6;
+  --eventBorderColor: #000000;
+  --eventAppointment: #C0FFD9;
+  --eventSchedule: #C0D9FF;
+  --eventTask: #FFD9C0;
 }
 
 .calendar {
@@ -44,50 +45,145 @@
 
 }
 
-.start-10 {
-  grid-row-start: 2;
-}
-
-.start-11 {
-  grid-row-start: 3;
-}
-
-
-.start-12 {
-  grid-row-start: 4;
-}
-
+/*start*/
 .start-1 {
-  grid-row-start: 5;
+  grid-row-start: 1
 }
-
 .start-2 {
-  grid-row-start: 6;
+  grid-row-start: 2
+}
+.start-3 {
+  grid-row-start: 3
+}
+.start-4 {
+  grid-row-start: 4
+}
+.start-5 {
+  grid-row-start: 5
+}
+.start-6 {
+  grid-row-start: 6
+}
+.start-7 {
+  grid-row-start: 7
+}
+.start-8 {
+  grid-row-start: 8
+}
+.start-9 {
+  grid-row-start: 9
+}
+.start-10 {
+  grid-row-start: 10
+}
+.start-11 {
+  grid-row-start: 11
+}
+.start-12 {
+  grid-row-start: 12
+}
+.start-13 {
+  grid-row-start: 13
+}
+.start-14 {
+  grid-row-start: 14
+}
+.start-15 {
+  grid-row-start: 15
+}
+.start-16 {
+  grid-row-start: 16
+}
+.start-17 {
+  grid-row-start: 17
+}
+.start-18 {
+  grid-row-start: 18
+}
+.start-19 {
+  grid-row-start: 19
+}
+.start-20 {
+  grid-row-start: 20
+}
+.start-21 {
+  grid-row-start: 21
+}
+.start-22 {
+  grid-row-start: 22
+}
+.start-23 {
+  grid-row-start: 23
 }
 
-.end-12 {
+/*end*/
+.end-1 {
+  grid-row-end: 2;
+}
+.end-2 {
+  grid-row-end: 3;
+}
+.end-3 {
   grid-row-end: 4;
 }
-
-.end-1 {
+.end-4 {
   grid-row-end: 5;
 }
-
-.end-2 {
+.end-5 {
   grid-row-end: 6;
 }
-
-.end-3 {
+.end-6 {
   grid-row-end: 7;
 }
-
-.end-4 {
+.end-7 {
   grid-row-end: 8;
 }
-
-.end-5 {
+.end-8 {
   grid-row-end: 9;
 }
+.end-9 {
+  grid-row-end: 10;
+}
+.end-10 {
+  grid-row-end: 11;
+}
+.end-11 {
+  grid-row-end: 12;
+}
+.end-12 {
+  grid-row-end: 13;
+}
+.end-13 {
+  grid-row-end: 14;
+}
+.end-14 {
+  grid-row-end: 15;
+}
+.end-15 {
+  grid-row-end: 16;
+}
+.end-16 {
+  grid-row-end: 17;
+}
+.end-17 {
+  grid-row-end: 18;
+}
+.end-18 {
+  grid-row-end: 19;
+}
+.end-19 {
+  grid-row-end: 20;
+}
+.end-20 {
+  grid-row-end: 21;
+}
+.end-21 {
+  grid-row-end: 22;
+}
+.end-22 {
+  grid-row-end: 23;
+}
+
 
 .title {
   font-weight: 600;
@@ -106,7 +202,7 @@
 
 /*The height of the dates*/
 .date {
-  height: 100px
+  height: 120px
 }
 
 
@@ -115,21 +211,18 @@ body {
   background-color: rgb(246, 245, 245);
 }
 
-.corp-fi {
-  background: var(--eventColor1);
+.appointment {
+  background: var(--eventAppointment);
 }
 
-.ent-law {
-  background: var(--eventColor2);
+.schedule {
+  background: var(--eventSchedule);
 }
 
-.writing {
-  background: var(--eventColor3);
+.task {
+  background: var(--eventTask);
 }
 
-.securities {
-  background: var(--eventColor4);
-}
 
 /*Weekday place*/
 .date {
@@ -164,9 +257,53 @@ body {
   font-weight: 1000;
 }
 
+ul {list-style-type: none;}
+
+
+.WeeklyButton {
+  padding: 70px 25px;
+  width: 5%;
+}
+
+.WeeklyButton ul {
+  margin: 0;
+  padding: 0;
+}
+
+.WeeklyButton ul li {
+  color: rgb(10, 10, 10);
+  font-size: 30px;
+
+}
+
+.WeeklyButton .prev{
+  float: left;
+  padding: 5px;
+  background-color: white;
+  border: 1px solid var(--calBgBorderColor);
+
+}
+
+.WeeklyButton .next{
+  float: right;
+  padding: 5px;
+  background-color: white;
+  border: 1px solid var(--calBgBorderColor);
+
+}
+
 </style>
 <head>
 <body>
+<h1>Schedule Manager</h1>  
+<div class="WeeklyButton">
+  <ul>
+    <li class="prev">&#10094;</li>
+    <li class="next">&#10095;</li>
+  </ul>
+</div>
+
+
     <div class="calendar">
         <div class="timeline">
           <div class="spacer"></div>
@@ -204,7 +341,7 @@ body {
             </div>
             <div class="events">
               {% for x in sunday %}
-                <div class="event start-10 end-12 corp-fi"> 
+                <div class="event start-8 end-16 corp-fi"> 
                   <p class="title">{{ x.name }}</p>
                   <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
                 </div>
@@ -288,7 +425,7 @@ body {
             </div>
             <div class="events">
               {% for x in saturday %}
-                <div class="event start-10 end-12 corp-fi"> 
+                <div class="event start-10 end-11 schedule"> 
                   <p class="title">{{ x.name }}</p>
                   <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
                 </div>
