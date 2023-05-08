@@ -5,7 +5,7 @@ from django.db.models import Model
 class Task (models.Model):
     
     name = models.CharField(max_length=50)
-    expected_time = models.IntegerField()
+    expected_time = models.TimeField()
     date = models.DateField()
     #importancy_level = models.CharField(choices=LEVEL_VALUES,max_length=50,default='Low')
     importancy_level = models.PositiveSmallIntegerField(choices=(
@@ -25,5 +25,5 @@ class Appointment(models.Model):
         (1,"Never"),
         (2,"Every day"),
         (3,"Every Week"),
-        (4,"Once a month")
+        (4,"Once a month"),
     ))

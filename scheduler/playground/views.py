@@ -20,6 +20,13 @@ def index(request):
 def home(request):
     return render(request, 'home.html')
 
+def task_list(request):
+    return render(request, 'task_list.html', {
+        'task': Task.objects.all(),
+    })
+
+
+
 def add_task(request):
     form = AddTaskForm()
     if request.method == "POST":
@@ -39,7 +46,43 @@ def add_task(request):
     return render(request,'task_form.html', {
                 'form': form,
     })
-            
+
+def edit_task(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    if request.method == 'POST':
+        form = AddTaskForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            return HttpResponse(
+                status = 204,
+                headers={
+                'HX-Trigger': json.dumps({
+                    "showMessage": f"{task.name} updated."
+                    })
+            })
+        else:
+            form = AddTaskForm(instance=task)
+        return render(request, 'task_form.html', {
+        'form': form,
+        'task': task,
+    })
+
+@ require_POST
+def remove_task(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    task.delete()
+    return HttpResponse(
+        status=204,
+        headers={
+            'HX-Trigger': json.dumps({
+                "showMessage": f"{task.name} deleted."
+            })
+        })
+
+def appointment_list(request):
+    return render(request, 'appointment_list.html', {
+        'appointment': Appointment.objects.all(),
+    })
 
 def add_appointment(request):
     #when add_appontment button get clicked
@@ -63,25 +106,7 @@ def add_appointment(request):
         })
             
 
-def edit_task(request, pk):
-    task = get_object_or_404(Task, pk=pk)
-    if request.method == 'POST':
-        form = AddTaskForm(request.POST, instance=task)
-        if form.is_valid():
-            form.save()
-            return HttpResponse(
-                status = 204,
-                headers={
-                'HX-Trigger': json.dumps({
-                    "showMessage": f"{task.name} updated."
-                    })
-            })
-        else:
-            form = AddTaskForm(instance=task)
-        return render(request, 'task_form.html', {
-        'form': form,
-        'task': task,
-    })
+
 
 def edit_appointment(request, pk):
      appointment = get_object_or_404(Appointment, pk=pk)
@@ -105,17 +130,7 @@ def edit_appointment(request, pk):
         'appointment': appointment,
     })
 
-@ require_POST
-def remove_task(request, pk):
-    task = get_object_or_404(Task, pk=pk)
-    task.delete()
-    return HttpResponse(
-        status=204,
-        headers={
-            'HX-Trigger': json.dumps({
-                "showMessage": f"{task.name} deleted."
-            })
-        })
+
 
 @ require_POST
 def remove_appointment(request, pk):
@@ -131,23 +146,5 @@ def remove_appointment(request, pk):
         })
 
 
-def task_list(request):
-    return render(request, 'task_list.html', {
-        'task': Task.objects.all(),
-    })
-
-def appointment_list(request):
-    return render(request, 'appointment_list.html', {
-        'appointment': Appointment.objects.all(),
-    })
-
-
-#Maybe completely useless from here down 
-
-def say_Task(request):
-    return HttpResponse('Add a Task')
-
-def say_Appointment(request):
-    return HttpResponse('Add an Appointment')
 
 
