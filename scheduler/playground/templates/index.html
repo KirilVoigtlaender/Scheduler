@@ -35,6 +35,10 @@
           </tr>
         </tbody>
       </table>
+      <button hx-get="{% url 'add_task' %}" hx-target="#dialog" class="btn btn-primary">
+        Add a task
+      </button>
+      
       <table class="table appointment">
         <thead>
           <tr>
@@ -54,9 +58,7 @@
           </tr>
         </tbody>
       </table>
-      <button hx-get="{% url 'add_task' %}" hx-target="#dialog" class="btn btn-primary">
-        Add a task
-      </button>
+      
       <button hx-get="{% url 'add_appointment' %}" hx-target="#dialog" class="btn btn-primary">
         Add an appointment
       </button>

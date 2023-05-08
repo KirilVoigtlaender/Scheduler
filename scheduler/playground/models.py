@@ -3,12 +3,7 @@ from django.db.models import Model
 
 
 class Task (models.Model):
-    LEVEL_VALUES =(
-    ('Low', 'Low'),
-    ('Middle','Middle'),
-    ('High','High')
-    )
-
+    
     name = models.CharField(max_length=50)
     expected_time = models.IntegerField()
     date = models.DateField()
@@ -20,14 +15,7 @@ class Task (models.Model):
     ))
 
 class Appointment(models.Model):
-    REPETITION_VALUES = (
-        ('Never', 'Never'),
-        ('Every Day', 'Every Day'),
-        ('Every Week', 'Every Week'),
-        ('Every Month', 'Every Month'),
-        ('Every Year', 'Every Year')
-    )
-
+    
     name = models.CharField(max_length=50)
     start_time = models.TimeField()
     end_time = models.TimeField()

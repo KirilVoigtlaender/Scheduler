@@ -24,7 +24,7 @@ class TableForm(forms.Form):
 
 class AddTaskForm(forms.ModelForm):
     class Meta:
-        model=Task
+        model= Task
         fields= ['name', 'expected_time', 'date', 'importancy_level']
 
 class AddAppointmentForm(forms.ModelForm):

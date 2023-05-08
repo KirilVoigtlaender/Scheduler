@@ -27,7 +27,7 @@ def add_task(request):
         if form.is_valid():
             task = form.save()
             return HttpResponse(
-                status=204,
+                status = 204,
                 headers={
                     'HX-Trigger': json.dumps({
                         "TaskListChanged":None,
