@@ -359,7 +359,7 @@ ul {list-style-type: none;}
             </div>
             <div class="events">
               {% for x in monday %}
-                <div class="event start-8 end-16 corp-fi"> 
+                <div class="event start-8 end-16 schedule"> 
                   <p class="title">{{ x.name }}</p>
                   <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
                 </div>
@@ -378,7 +378,7 @@ ul {list-style-type: none;}
             </div>
             <div class="events">
               {% for x in tuesday %}
-                <div class="event start-10 end-12 corp-fi"> 
+                <div class="event start-10 end-12 schedule"> 
                   <p class="title">{{ x.name }}</p>
                   <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
                 </div>
@@ -397,7 +397,7 @@ ul {list-style-type: none;}
             </div>
             <div class="events">
               {% for x in wednesday %}
-                <div class="event start-10 end-12 corp-fi"> 
+                <div class="event start-10 end-12 schedule"> 
                   <p class="title">{{ x.name }}</p>
                   <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
                 </div>
@@ -416,7 +416,7 @@ ul {list-style-type: none;}
             </div>
             <div class="events">
               {% for x in thursday %}
-                <div class="event start-10 end-12 corp-fi"> 
+                <div class="event start-10 end-12 schedule"> 
                   <p class="title">{{ x.name }}</p>
                   <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
                 </div>
@@ -435,7 +435,7 @@ ul {list-style-type: none;}
             </div>
             <div class="events">
               {% for x in friday %}
-                <div class="event start-10 end-12 corp-fi"> 
+                <div class="event start-10 end-12 schedu;e"> 
                   <p class="title">{{ x.name }}</p>
                   <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
                 </div>
@@ -454,7 +454,7 @@ ul {list-style-type: none;}
             </div>
             <div class="events">
               {% for x in saturday %}
-                <div class="event start-10 end-12 corp-fi"> 
+                <div class="event start-10 end-12 schedule"> 
                   <p class="title">{{ x.name }}</p>
                   <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
                 </div>
@@ -479,10 +479,6 @@ ul {list-style-type: none;}
                   <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
                 </div>
               {% endfor %}
-              <!-- <div class="event start-10 end-12 corp-fi">
-                <p class="title">Corporate Finance</p>
-                <p class="time">10 AM - 12 PM</p>
-              </div> -->
             </div>
           </div>
     </div>
