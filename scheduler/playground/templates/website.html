@@ -262,7 +262,8 @@ ul {list-style-type: none;}
 
 .WeeklyButton {
   padding: 70px 25px;
-  width: 5%;
+  width: 11.5%;
+
 }
 
 .WeeklyButton ul {
@@ -270,25 +271,25 @@ ul {list-style-type: none;}
   padding: 0;
 }
 
-.WeeklyButton ul li {
+/* .WeeklyButton ul li {
   color: rgb(10, 10, 10);
   font-size: 30px;
 
-}
+} */
 
 .WeeklyButton .prev{
   float: left;
   padding: 5px;
-  background-color: white;
-  border: 1px solid var(--calBgBorderColor);
+  /* background-color: white;
+  border: 1px solid var(--calBgBorderColor); */
 
 }
 
 .WeeklyButton .next{
   float: right;
   padding: 5px;
-  background-color: white;
-  border: 1px solid var(--calBgBorderColor);
+  /* background-color: white;
+  border: 1px solid var(--calBgBorderColor); */
 
 }
 
@@ -299,14 +300,14 @@ ul {list-style-type: none;}
 <div class="WeeklyButton">
 
   <ul>
-    <li class="prev">&#10094;
+    <li class="prev">
       <form action="" method="post">
         {% csrf_token %}
         <input type="hidden" name="weekrequest" value="last-week">
         <button type="submit">last week</button>
     </form>
     </li>
-    <li class="next">&#10095;
+    <li class="next">
       <form action="" method="post">
         {% csrf_token %}
         <input type="hidden" name="weekrequest" value="next-week">
