@@ -8,46 +8,46 @@ from calendarweek import CalendarWeek
 from django.db import models
 from .models import TimeRecord
 from django.utils import timezone
+from datetime import timedelta
+from asgiref.sync import sync_to_async
 
 def say_hello(request):
     return HttpResponse('hello world')
 
 def website(request):
-    time_records = TimeRecord.objects.all()
-    week = timezone.now().isocalendar()[1]
-    current_records = [time_record for time_record in time_records if time_record.get_week() == week]
+    day = request.session.get('current_week', date.today().isoformat())
     if request.method == 'POST':
         weekrequest = request.POST['weekrequest']
 
         if weekrequest == 'next-week':
-            current_records = [time_record for time_record in time_records if
-                               time_record.get_week() == week + 1]
+            day = (date.fromisoformat(day) + timedelta(0,0,0,0,0,0,1)).isoformat()
         if weekrequest == 'last-week':
-            current_records = [time_record for time_record in time_records if
-                               time_record.get_week() == week - 1]
-    current_week = CalendarWeek(year=current_records[0].get_year(), week=current_records[0].get_week())
+            day = (date.fromisoformat(day) - timedelta(0,0,0,0,0,0,1)).isoformat()
+    
+    current_week = CalendarWeek().from_date(date.fromisoformat(day))
+    request.session['current_week'] = day
 
-    sunday = Appointment.objects.filter(date=current_week[0]).values()
-    monday = Appointment.objects.filter(date=current_week[1]).values()
-    tuesday = Appointment.objects.filter(date=current_week[2]).values()
-    wednesday = Appointment.objects.filter(date=current_week[3]).values()
-    thursday = Appointment.objects.filter(date=current_week[4]).values()
-    friday = Appointment.objects.filter(date=current_week[5]).values()
-    saturday = Appointment.objects.filter(date=current_week[6]).values()
+    monday = Appointment.objects.filter(date=current_week[0]).values()
+    tuesday = Appointment.objects.filter(date=current_week[1]).values()
+    wednesday = Appointment.objects.filter(date=current_week[2]).values()
+    thursday = Appointment.objects.filter(date=current_week[3]).values()
+    friday = Appointment.objects.filter(date=current_week[4]).values()
+    saturday = Appointment.objects.filter(date=current_week[5]).values()
+    sunday = Appointment.objects.filter(date=current_week[6]).values()
 
 
 
 
     template = loader.get_template('website.html')
     context = {
-        'sunday': sunday,
         'monday': monday,
         'tuesday': tuesday,
         'wednesday': wednesday,
         'thursday': thursday,
         'friday': friday,
         'saturday': saturday,
-        'currentday' : current_records[0].get_week(),
+        'sunday': sunday,
+        'currentday' : date.today(),
         'date1' : current_week[0],
         'date2' : current_week[1],
         'date3' : current_week[2],

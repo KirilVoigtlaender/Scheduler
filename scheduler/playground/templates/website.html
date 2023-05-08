@@ -299,9 +299,6 @@ ul {list-style-type: none;}
 <div class="WeeklyButton">
 
   <ul>
-    {% for record in current_records %}
-      <p> {{ forloop.counter }} {{ record.ts_date }}</p>
-    {% endfor %} 
     <li class="prev">&#10094;
       <form action="" method="post">
         {% csrf_token %}
@@ -350,38 +347,19 @@ ul {list-style-type: none;}
         </div>
 
         <div class="days">
-          <div class="day sun">
+          <div class="day mon">
             <div class="date">
               {% if date1 == currentday %}
-                <p class="date-day1">Sunday</p>
+                <p class="date-day1">Monday</p>
                 <p class="date-num1">{{ date1|date:"d-m" }}</p>
               {% else %}
-                <p class="date-day">Sunday</p>
+                <p class="date-day">Monday</p>
                 <p class="date-num">{{ date1|date:"d-m" }}</p>
               {% endif %}
             </div>
             <div class="events">
-              {% for x in sunday %}
-                <div class="event start-8 end-16 corp-fi"> 
-                  <p class="title">{{ x.name }}</p>
-                  <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
-                </div>
-              {% endfor %}
-            </div>
-          </div>
-          <div class="day mon">
-            <div class="date">
-              {% if date2 == currentday %}
-                <p class="date-day1">Monday</p>
-                <p class="date-num1">{{ date2|date:"d-m" }}</p>
-              {% else %}
-                <p class="date-day">Monday</p>
-                <p class="date-num">{{ date2|date:"d-m" }}</p>
-             {% endif %}
-            </div>
-            <div class="events">
               {% for x in monday %}
-                <div class="event start-10 end-12 corp-fi"> 
+                <div class="event start-8 end-16 corp-fi"> 
                   <p class="title">{{ x.name }}</p>
                   <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
                 </div>
@@ -390,13 +368,13 @@ ul {list-style-type: none;}
           </div>
           <div class="day tue">
             <div class="date">
-              {% if date3 == currentday %}
+              {% if date2 == currentday %}
                 <p class="date-day1">Tuesday</p>
-                <p class="date-num1">{{ date3|date:"d-m" }}</p>
+                <p class="date-num1">{{ date2|date:"d-m" }}</p>
               {% else %}
                 <p class="date-day">Tuesday</p>
-                <p class="date-num">{{ date3|date:"d-m" }}</p>
-              {% endif %}
+                <p class="date-num">{{ date2|date:"d-m" }}</p>
+             {% endif %}
             </div>
             <div class="events">
               {% for x in tuesday %}
@@ -409,12 +387,12 @@ ul {list-style-type: none;}
           </div>
           <div class="day wed">
             <div class="date">
-              {% if date4 == currentday %}
+              {% if date3 == currentday %}
                 <p class="date-day1">Wednesday</p>
-                <p class="date-num1">{{ date4|date:"d-m" }}</p>
+                <p class="date-num1">{{ date3|date:"d-m" }}</p>
               {% else %}
                 <p class="date-day">Wednesday</p>
-                <p class="date-num">{{ date4|date:"d-m" }}</p>
+                <p class="date-num">{{ date3|date:"d-m" }}</p>
               {% endif %}
             </div>
             <div class="events">
@@ -428,12 +406,12 @@ ul {list-style-type: none;}
           </div>
           <div class="day thu">
             <div class="date">
-              {% if date5 == currentday %}
-              <p class="date-day1">Thursday</p>
-              <p class="date-num1">{{ date5|date:"d-m" }}</p>
+              {% if date4 == currentday %}
+                <p class="date-day1">Thursday</p>
+                <p class="date-num1">{{ date4|date:"d-m" }}</p>
               {% else %}
                 <p class="date-day">Thursday</p>
-                <p class="date-num">{{ date5|date:"d-m" }}</p>
+                <p class="date-num">{{ date4|date:"d-m" }}</p>
               {% endif %}
             </div>
             <div class="events">
@@ -443,16 +421,16 @@ ul {list-style-type: none;}
                   <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
                 </div>
               {% endfor %}
+            </div>
           </div>
-        </div>
           <div class="day fri">
             <div class="date">
-              {% if date6 == currentday %}
-                <p class="date-day1">Friday</p>
-                <p class="date-num1">{{ date6|date:"d-m" }}</p>
+              {% if date5 == currentday %}
+              <p class="date-day1">Friday</p>
+              <p class="date-num1">{{ date5|date:"d-m" }}</p>
               {% else %}
                 <p class="date-day">Friday</p>
-                <p class="date-num">{{ date6|date:"d-m" }}</p>
+                <p class="date-num">{{ date5|date:"d-m" }}</p>
               {% endif %}
             </div>
             <div class="events">
@@ -466,17 +444,36 @@ ul {list-style-type: none;}
         </div>
           <div class="day sat">
             <div class="date">
-              {% if date7 == currentday %}
+              {% if date6 == currentday %}
                 <p class="date-day1">Saturday</p>
-                <p class="date-num1">{{ date7|date:"d-m" }}</p>
+                <p class="date-num1">{{ date6|date:"d-m" }}</p>
               {% else %}
                 <p class="date-day">Saturday</p>
+                <p class="date-num">{{ date6|date:"d-m" }}</p>
+              {% endif %}
+            </div>
+            <div class="events">
+              {% for x in saturday %}
+                <div class="event start-10 end-12 corp-fi"> 
+                  <p class="title">{{ x.name }}</p>
+                  <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
+                </div>
+              {% endfor %}
+          </div>
+        </div>
+          <div class="day sun">
+            <div class="date">
+              {% if date7 == currentday %}
+                <p class="date-day1">Sunday</p>
+                <p class="date-num1">{{ date7|date:"d-m" }}</p>
+              {% else %}
+                <p class="date-day">Sunday</p>
                 <p class="date-num">{{ date7|date:"d-m" }}</p>
               {% endif %}
 
             </div>
             <div class="events">
-              {% for x in saturday %}
+              {% for x in sunday %}
                 <div class="event start-10 end-11 schedule"> 
                   <p class="title">{{ x.name }}</p>
                   <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
