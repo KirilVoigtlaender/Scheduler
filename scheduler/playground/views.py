@@ -22,7 +22,7 @@ def home(request):
 
 def task_list(request):
     return render(request, 'task_list.html', {
-        'task': Task.objects.all(),
+        'task_list': Task.objects.all(),  # Update the key to 'task_list'
     })
 
 
@@ -81,7 +81,7 @@ def remove_task(request, pk):
 
 def appointment_list(request):
     return render(request, 'appointment_list.html', {
-        'appointment': Appointment.objects.all(),
+        'appointment_list': Appointment.objects.all(),
     })
 
 def add_appointment(request):
