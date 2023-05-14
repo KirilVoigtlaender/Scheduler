@@ -34,18 +34,16 @@ def add_task(request):
         if form.is_valid():
             task = form.save()
             return HttpResponse(
-                status = 204,
+                status=204,
                 headers={
                     'HX-Trigger': json.dumps({
-                        "TaskListChanged":None,
+                        "TaskListChanged": None,
                         "showMessage": f"{task.name} added."
                     })
-                })
-        else:
-            form = AddTaskForm()
-    return render(request,'task_form.html', {
-                'form': form,
-    })
+                }
+            )
+    return render(request, 'task_form.html', {'form': form})
+
 
 def edit_task(request, pk):
     task = get_object_or_404(Task, pk=pk)
@@ -99,8 +97,6 @@ def add_appointment(request):
                         "showMessage": f"{appointment.name} added."
                     })
                 })
-        else:
-            form = AddAppointmentForm()
     return render(request,'appointment_form.html',{
                 'form': form,
         })
