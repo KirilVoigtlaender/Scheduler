@@ -20,14 +20,15 @@ from playground import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('playground/', include('playground.urls'))
     path('',views.index),
-    path('task', views.task_list, name='task_list'),#Task
-    path('task/add', views.add_task, name='add_task'),#Task
-    path('task/<int:pk>/remove', views.remove_task, name='remove_task'),#Task
-    path('task/<int:pk>/edit', views.edit_task, name='edit_task'),#Task
-    path('appointment', views.appointment_list, name='appointment_list'),#Appointment
-    path('appointment/add', views.add_appointment, name='add_appointment'),#Appointment
-    path('appointment/<int:pk>/remove', views.remove_appointment, name='remove_appointment'),#Appointment
-    path('appointment/<int:pk>/edit', views.edit_appointment, name='edit_appointment'),#Appointmnet
+    ##Task##
+    path('task', views.task_list, name='task_list'),
+    path('task/add', views.add_task, name='add_task'),
+    path('task/<int:pk>/remove', views.remove_task, name='remove_task'),
+    path('task/<int:pk>/edit', views.edit_task, name='edit_task'),
+    ##Appointment##
+    path('appointment', views.appointment_list, name='appointment_list'),
+    path('appointment/add', views.add_appointment, name='add_appointment'),
+    path('appointment/<int:pk>/remove', views.remove_appointment, name='remove_appointment'),
+    path('appointment/<int:pk>/edit', views.edit_appointment, name='edit_appointment'),
 ]

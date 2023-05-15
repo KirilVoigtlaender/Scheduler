@@ -1,31 +1,32 @@
 
 import json
-from django.shortcuts import render
 from django.http import HttpResponse
-
+from django.shortcuts import render
 from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404
 
-from django.template import loader
 from .models import Task,Appointment
 from .forms import AddTaskForm, AddAppointmentForm
 
+#Test Function
 def say_hello(request):
     return HttpResponse('Hello World')
 
-def index(request):
-    #main view with the button
-    return render(request, 'index.html')#The same as his index.html
-#Don't know if we need this function for now
+#Test Function
 def home(request):
     return render(request, 'home.html')
 
+
+### MAINVIEW ###
+def index(request):
+    return render(request, 'index.html')
+
+
+### TASK ###
 def task_list(request):
     return render(request, 'task_list.html', {
-        'task_list': Task.objects.all(),  # Update the key to 'task_list'
+        'task_list': Task.objects.all(), 
     })
-
-
 
 def add_task(request):
     form = AddTaskForm()
@@ -44,10 +45,9 @@ def add_task(request):
             )
     return render(request, 'task_form.html', {'form': form})
 
-
 def edit_task(request, pk):
     task = get_object_or_404(Task, pk=pk)
-    form = AddTaskForm(instance=task)  # Define an empty form instance
+    form = AddTaskForm(instance=task)
     if request.method == 'POST':
         form = AddTaskForm(request.POST, instance=task)
         if form.is_valid():
@@ -63,8 +63,7 @@ def edit_task(request, pk):
             )
     return render(request, 'task_form.html', {'form': form})
 
-
-@ require_POST
+@require_POST
 def remove_task(request, pk):
     task = get_object_or_404(Task, pk=pk)
     task.delete()
@@ -72,17 +71,19 @@ def remove_task(request, pk):
         status=204,
         headers={
             'HX-Trigger': json.dumps({
+                "TaskListChanged": None,
                 "showMessage": f"{task.name} deleted."
             })
         })
-
+    
+    
+### APPOINTMENT ###
 def appointment_list(request):
     return render(request, 'appointment_list.html', {
         'appointment_list': Appointment.objects.all(),
     })
 
 def add_appointment(request):
-    #when add_appontment button get clicked
     form = AddAppointmentForm()
     if request.method == "POST":
         form = AddAppointmentForm(request.POST)
@@ -100,9 +101,6 @@ def add_appointment(request):
                 'form': form
         })
             
-
-
-
 def edit_appointment(request, pk):
     appointment = get_object_or_404(Appointment, pk=pk)
     form = AddAppointmentForm(instance=appointment)
@@ -120,9 +118,7 @@ def edit_appointment(request, pk):
                 })
     return render(request, 'appointment_form.html', {'form': form})
 
-
-
-@ require_POST
+@require_POST
 def remove_appointment(request, pk):
     appointment = get_object_or_404(Appointment, pk=pk)
     appointment.delete()
@@ -130,11 +126,7 @@ def remove_appointment(request, pk):
         status=204,
         headers={
             'HX-Trigger': json.dumps({
-                "movieListChanged": None,
+                "AppointmentListChanged": None,
                 "showMessage": f"{appointment.name} deleted."
             })
         })
-
-
-
-

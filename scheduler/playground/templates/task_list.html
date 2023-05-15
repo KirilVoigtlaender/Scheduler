@@ -7,5 +7,11 @@
   <td>
     <button class="btn btn-primary btn-sm" hx-get="{% url 'edit_task' pk=task.pk %}" hx-target="#dialog">Edit</button>
   </td>
+  <td>
+    <form hx-post="{% url 'remove_task' pk=task.pk %}">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+    </form>
+  </td>
 </tr>
 {% endfor %}
