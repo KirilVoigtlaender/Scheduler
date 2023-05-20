@@ -10,8 +10,11 @@ from django.template import loader
 from .models import Task,Appointment
 from .forms import AddTaskForm, AddAppointmentForm
 
-def say_hello(request):
-    return HttpResponse('Hello World')
+from datetime import date
+from calendarweek import CalendarWeek
+from django.utils import timezone
+from datetime import timedelta
+
 
 def index(request):
     #main view with the button
@@ -20,12 +23,15 @@ def index(request):
 def home(request):
     return render(request, 'home.html')
 
+def say_hello(request):
+    return HttpResponse('hello world')
+
+
+## TASK ##
 def task_list(request):
     return render(request, 'task_list.html', {
         'task_list': Task.objects.all(),  # Update the key to 'task_list'
     })
-
-
 
 def add_task(request):
     form = AddTaskForm()
@@ -43,7 +49,6 @@ def add_task(request):
                 }
             )
     return render(request, 'task_form.html', {'form': form})
-
 
 def edit_task(request, pk):
     task = get_object_or_404(Task, pk=pk)
@@ -63,7 +68,6 @@ def edit_task(request, pk):
             )
     return render(request, 'task_form.html', {'form': form})
 
-
 @ require_POST
 def remove_task(request, pk):
     task = get_object_or_404(Task, pk=pk)
@@ -72,17 +76,19 @@ def remove_task(request, pk):
         status=204,
         headers={
             'HX-Trigger': json.dumps({
+                "TaskListChanged": None,
                 "showMessage": f"{task.name} deleted."
             })
         })
 
+
+## APPOINTMENT ##
 def appointment_list(request):
     return render(request, 'appointment_list.html', {
         'appointment_list': Appointment.objects.all(),
     })
 
 def add_appointment(request):
-    #when add_appontment button get clicked
     form = AddAppointmentForm()
     if request.method == "POST":
         form = AddAppointmentForm(request.POST)
@@ -100,9 +106,6 @@ def add_appointment(request):
                 'form': form
         })
             
-
-
-
 def edit_appointment(request, pk):
     appointment = get_object_or_404(Appointment, pk=pk)
     form = AddAppointmentForm(instance=appointment)
@@ -120,8 +123,6 @@ def edit_appointment(request, pk):
                 })
     return render(request, 'appointment_form.html', {'form': form})
 
-
-
 @ require_POST
 def remove_appointment(request, pk):
     appointment = get_object_or_404(Appointment, pk=pk)
@@ -130,24 +131,13 @@ def remove_appointment(request, pk):
         status=204,
         headers={
             'HX-Trigger': json.dumps({
-                "movieListChanged": None,
+                "AppointmentListChanged": None,
                 "showMessage": f"{appointment.name} deleted."
             })
         })
-from django.template import loader
-from .models import Appointment
-from datetime import date
-from django.db import models
-from calendarweek import CalendarWeek
-from django.db import models
-from .models import TimeRecord
-from django.utils import timezone
-from datetime import timedelta
-from asgiref.sync import sync_to_async
 
-def say_hello(request):
-    return HttpResponse('hello world')
 
+## SCHEDULE ##
 def website(request):
     day = request.session.get('current_week', date.today().isoformat())
     if request.method == 'POST':
@@ -169,9 +159,6 @@ def website(request):
     saturday = Appointment.objects.filter(date=current_week[5]).values()
     sunday = Appointment.objects.filter(date=current_week[6]).values()
 
-
-
-
     template = loader.get_template('website.html')
     context = {
         'monday': monday,
@@ -190,8 +177,5 @@ def website(request):
         'date6' : current_week[5],
         'date7' : current_week[6],
     }
-
-    
-
     return HttpResponse(template.render(context, request))
 
