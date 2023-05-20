@@ -47,23 +47,22 @@ def add_task(request):
 
 def edit_task(request, pk):
     task = get_object_or_404(Task, pk=pk)
+    form = AddTaskForm(instance=task)  # Define an empty form instance
     if request.method == 'POST':
         form = AddTaskForm(request.POST, instance=task)
         if form.is_valid():
             form.save()
             return HttpResponse(
-                status = 204,
+                status=204,
                 headers={
-                'HX-Trigger': json.dumps({
-                    "showMessage": f"{task.name} updated."
+                    'HX-Trigger': json.dumps({
+                        "TaskListChanged": None,
+                        "showMessage": f"{task.name} updated."
                     })
-            })
-        else:
-            form = AddTaskForm(instance=task)
-        return render(request, 'task_form.html', {
-        'form': form,
-        'task': task,
-    })
+                }
+            )
+    return render(request, 'task_form.html', {'form': form})
+
 
 @ require_POST
 def remove_task(request, pk):
@@ -98,17 +97,18 @@ def add_appointment(request):
                     })
                 })
     return render(request,'appointment_form.html',{
-                'form': form,
+                'form': form
         })
             
 
 
 
 def edit_appointment(request, pk):
-     appointment = get_object_or_404(Appointment, pk=pk)
-     if request.method == "POST":
-         form= AddAppointmentForm(request.POST, instance=appointment)
-         if form.is_valid():
+    appointment = get_object_or_404(Appointment, pk=pk)
+    form = AddAppointmentForm(instance=appointment)
+    if request.method == "POST":
+        form= AddAppointmentForm(request.POST, instance=appointment)
+        if form.is_valid():
             form.save()
             return HttpResponse(
                 status=204,
@@ -117,14 +117,8 @@ def edit_appointment(request, pk):
                         "AppointmentListChanged": None,
                         "showMessage": f"{appointment.name} updated."
                     })
-                }
-            )
-         else:
-             form = AddAppointmentForm(instance=appointment)
-             return render(request, 'appointment_form.html', {
-        'form': form,
-        'appointment': appointment,
-    })
+                })
+    return render(request, 'appointment_form.html', {'form': form})
 
 
 
