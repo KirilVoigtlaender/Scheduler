@@ -56,5 +56,8 @@ def website(request):
         'date6' : current_week[5],
         'date7' : current_week[6],
     }
+
+    
+
     return HttpResponse(template.render(context, request))
 
