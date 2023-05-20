@@ -27,3 +27,5 @@ class Appointment(models.Model):
         (3,"Every Week"),
         (4,"Once a month"),
     ))
+
+
