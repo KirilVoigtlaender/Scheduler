@@ -1,15 +1,52 @@
-from models import Task
-from datetime import date
+from models import Task, Appointment
+from datetime import date, timedelta, datetime
 
 def algorithm():
     today = date.today()
+    start_of_week = today - timedelta(days=today.weekday())
+    end_of_week = start_of_week + timedelta(days=6)
     #tasks = Task.objects.filter(date__gt=today).order_by('date')  #ordered list after dates
-    expected = Task.objects.filter(date_gt=today).order_by('expected_time') #ordered list after expected time
+    #expected = Task.objects.filter(date_gt=today).order_by('expected_time') #ordered list after expected time
     #list = []  #here we want to insert the sorted stuff ater the calculations then 
-    date_importancy = Task.objects.filter(date__gt=today).order_by('-importancy_level', 'date')
+    #date_importancy = Task.objects.filter(date__gt=today).order_by('-importancy_level', 'date')
     
+    #Compute the schedule week by week
+
+    # two dimensional array
+    #first block going from 0-6 for the days monday-sunday
+    #second block has 0-95 entrys for going in 15 minutes block over the while day
+    #False if time is free, True otherwise. Starts with full False
+    filled_schedule = [[[False]*96]*7] #of one week, at the end of the week we set it to all false again
+
+    for row in filled_schedule:
+        for element in row:
+            print(element)
+    #Fill the array with the appointments and scheduled appointments from Uni
+    appointments_of_the_week = Appointment.objects.filter(date__gt = start_of_week, date__lt = end_of_week)
+
     
 
+    for appointment in appointments_of_the_week:
+        apt_date = appointment.date
+        apt_weekday = apt_date.weekday()
+        apt_start = appointment.start_time
+        apt_end = appointment.end_time
+
+        
+
+    sorted_tasks = sorted(Task.objects.filter(date__gt = today), key=lambda x: (-x.importancy_level,x.date))
+    
+    tasks_nb = len(sorted_tasks)
+    total_time = sum(task.expected_time for task in sorted_tasks)
+    avg_time_per_task = total_time/tasks_nb
+    
+        #compute a good time / maybe one or many depends on the expected time
+        #while computed time is already taken, compute a new time
+        #
+
+
+
+    
     #for i in range(len(expected)):
         #if(expected[i].importancy_level < expected[i+1].importancy_level):
        #             switch = expected[i]
@@ -24,11 +61,11 @@ def algorithm():
 #                    expected[i+1] = switch
 
     
-    for i in range(len(date_importancy)):   
-        if(date_importancy[i].expected_time < date_importancy[i+1].expected_time):
-                    switch = date_importancy[i]
-                    date_importancy[i] = date_importancy[i+1]
-                    date_importancy[i+1] = switch
+    #for i in range(len(date_importancy)):   
+     #   if(date_importancy[i].expected_time < date_importancy[i+1].expected_time):
+      #              switch = date_importancy[i]
+       #             date_importancy[i] = date_importancy[i+1]
+        #            date_importancy[i+1] = switch
 
 
 
@@ -54,4 +91,4 @@ def algorithm():
 #we need a secound sorting I think, which we use when we try to insert the assignment in the schedule,
 #which checks wherter the  day of inserting is behind the deadline
 #                   if yes move it upwards in the list and place it at a nother place
-#                   if no we can leave it as it is 
+#                   if no we can leave it as it 
