@@ -49,3 +49,9 @@ def algorithm():
 #(maybe another list sorted after the excpected times)
 #4.Step: Make some actual calculations and cry
 
+
+
+#we need a secound sorting I think, which we use when we try to insert the assignment in the schedule,
+#which checks wherter the  day of inserting is behind the deadline
+#                   if yes move it upwards in the list and place it at a nother place
+#                   if no we can leave it as it is 
