@@ -24,15 +24,32 @@ def algorithm():
     #Fill the array with the appointments and scheduled appointments from Uni
     appointments_of_the_week = Appointment.objects.filter(date__gt = start_of_week, date__lt = end_of_week)
 
-    
-
     for appointment in appointments_of_the_week:
         apt_date = appointment.date
         apt_weekday = apt_date.weekday()
-        apt_start = appointment.start_time
-        apt_end = appointment.end_time
-
+        start_time_str = appointment.start_time
+        end_time_str = appointment.end_time
         
+        # Convert start time string to datetime object
+        start_time_obj = datetime.strptime(start_time_str, "%H:%M")
+
+        # Convert end time string to datetime object
+        end_time_obj = datetime.strptime(end_time_str, "%H:%M")
+
+        # Calculate the number of minutes since midnight for start and end times
+        start_minutes_since_midnight = start_time_obj.hour * 60 + start_time_obj.minute
+        end_minutes_since_midnight = end_time_obj.hour * 60 + end_time_obj.minute
+
+        # Calculate the corresponding values from 0 to 95 for start and end times
+        start_time_value = start_minutes_since_midnight // 15
+        end_time_value = end_minutes_since_midnight // 15
+
+        for time in range(start_time_value, end_time_value):
+            filled_schedule[time][apt_weekday] = True
+        #Now we know the free time of the week to work
+
+    #Maybe know we should define the sleeping time, lets say from 23:00 to 7:00
+
 
     sorted_tasks = sorted(Task.objects.filter(date__gt = today), key=lambda x: (-x.importancy_level,x.date))
     
