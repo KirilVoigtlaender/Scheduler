@@ -49,6 +49,9 @@ def algorithm():
         #Now we know the free time of the week to work
 
     #Maybe know we should define the sleeping time, lets say from 23:00 to 7:00
+    for day in range(7):
+        for time in range(23*60//15, 7*60//15):
+            filled_schedule[time][day] = True
 
 
     sorted_tasks = sorted(Task.objects.filter(date__gt = today), key=lambda x: (-x.importancy_level,x.date))
@@ -56,56 +59,29 @@ def algorithm():
     tasks_nb = len(sorted_tasks)
     total_time = sum(task.expected_time for task in sorted_tasks)
     avg_time_per_task = total_time/tasks_nb
+
+
+    # Calculate how much freetime you have on each day of the week
+    freetime = []
+    for day in len(appointments_of_the_week):
+        freeminutes = 0
+        for time in len(appointments_of_the_week[0]):
+            if not filled_schedule[time][day]:
+                freeminutes =+ 15
+        freetime.append(freeminutes)
+
+    
+    for task in len(sorted_tasks):
+        for day in len(appointments_of_the_week):
+            if task.date == start_of_week + timedelta(days=day):
+                
+    
+# how many extra assingments we give on a day so that the average 
+#  per day is equal almost
+# and then need to find a way to put it imnto the schedule
+        
     
         #compute a good time / maybe one or many depends on the expected time
         #while computed time is already taken, compute a new time
-        #
-
-
-
-    
-    #for i in range(len(expected)):
-        #if(expected[i].importancy_level < expected[i+1].importancy_level):
-       #             switch = expected[i]
-      #              expected[i] = expected[i+1]
-     #               expected[i+1] = switch
         
-
-    #for i in range(len(expected)):
-   #     if(expected[i].date < expected[i+1].date):
-  #                  switch = expected[i]
- #                   expected[i] = expected[i+1]
-#                    expected[i+1] = switch
-
-    
-    #for i in range(len(date_importancy)):   
-     #   if(date_importancy[i].expected_time < date_importancy[i+1].expected_time):
-      #              switch = date_importancy[i]
-       #             date_importancy[i] = date_importancy[i+1]
-        #            date_importancy[i+1] = switch
-
-
-
-
-        #OOP -> for sunday high
-        #LOGic -> for Friday high
-        #calculus ->for friday high
-        #aI-> for tmr low
-
-        
-    #we look at the tasks ->and then we check if currenct object has a lower importancy then the next object
-    #if yes, maybe switch if no leave it as it is 
-
-
-#1.Step: Create a list, which contains all Task
-#2.Step: Order this list, after the date, which is the closest to today -> nearest at top
-#3.Step: Create some sort of integer values for (high,-middle,-low)importance and for the expected time
-#(maybe another list sorted after the excpected times)
-#4.Step: Make some actual calculations and cry
-
-
-
-#we need a secound sorting I think, which we use when we try to insert the assignment in the schedule,
-#which checks wherter the  day of inserting is behind the deadline
-#                   if yes move it upwards in the list and place it at a nother place
-#                   if no we can leave it as it 
+ 

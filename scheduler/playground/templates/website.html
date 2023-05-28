@@ -8,10 +8,10 @@
 <style>
  
 
-   :root {
+:root {
   --numDays: 7;
   --numHours: 95;
-  --timeHeight: 100px;
+  --timeHeight: 60px; /*100 */
   --calBgColor: #ffffff;
   --calBgBorderColor: #000000;
   --eventBorderColor: #000000;
@@ -20,28 +20,30 @@
   --eventTask: #FFD9C0;
 }
 
-.calendar-container{
+/* .calendar-container{
   height: 100%;
-}
+} */
 
 .calendar {
   display: grid;
   gap:25px;
-  grid-template-columns: max-content max-content max-content max-content max-content max-content max-content;
-  margin: 3rem; /*The size of the schedule*/
-  height: 100%;
-}
-
-.days {
-  display: grid;
-  gap: 10px;
-  grid-template-columns: max-content max-content max-content max-content max-content max-content max-content ;
-
+  /* grid-template-columns: max-content max-content max-content max-content max-content max-content max-content; */
+  grid-template-columns: auto 1fr;
+  margin: 10rem; /*The size of the schedule*/
 }
 
 .timeline {
   display: grid;
   grid-template-rows: repeat(var(--numHours), var(--timeHeight));
+
+}
+
+.days {
+  display: grid;
+  grid-column: 2;
+  gap: 5px;
+  /* grid-template-columns: max-content max-content max-content max-content max-content max-content max-content ; */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 
 }
 
@@ -735,31 +737,38 @@ ul {list-style-type: none;}
 .WeeklyButton .prev{
   padding: 10px;
   float: left;
-  /* background-color: white;
-  border: 1px solid var(--calBgBorderColor); */
 
 }
 
 .WeeklyButton .next{
   padding: 10px;
   float: right;
-  /* background-color: white;
-  border: 1px solid var(--calBgBorderColor); */
+  
 
 }
 
-.AddTask{
+/* Use a media query to add a breakpoint at 800px: */
+@media only screen and (max-width: 1024px) {
+    .calendar {
+    display: grid;
+    gap:25px;
+    /* grid-template-columns: max-content max-content max-content max-content max-content max-content max-content; */
+    grid-template-columns: auto 1fr;
+    margin: 10rem; /*The size of the schedule*/
+  }
+}
+
+/* .AddTask{
   float: right
-}
-
-
-
+} */
 
 </style>
+
 <head>
 <body>
-<div class="container-fluid">
-<h1>Schedule Manager</h1> 
+  <div class="con">
+<!-- <div class="container-fluid">
+  <h1>Schedule Manager</h1> 
 <div class="WeeklyButton">
   <ul>
     <li class="prev">
@@ -776,254 +785,244 @@ ul {list-style-type: none;}
         <button type="submit">next week</button>
     </form>
     </li>
-    <!-- <li class="AddTask">
-        <button onclick="document.location='http://127.0.0.1:8000/'">Add Task</button>
-    </form>
-    </li> -->
-</div>
-
-<!-- <div class="AddTask">
-  <button onclick="document.location='http://127.0.0.1:8000/'">Add Task</button>
 </div> -->
 
 
-    <div class="calendar">
-        <div class="timeline">
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="time-marker">01:00</div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="time-marker">02:00</div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="time-marker">03:00</div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="time-marker">04:00</div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="time-marker">05:00</div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="time-marker">06:00</div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="time-marker">07:00</div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="time-marker">08:00</div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="time-marker">09:00</div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="time-marker">10:00</div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="time-marker">11:00</div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="time-marker">12:00</div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="time-marker">13:00</div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="time-marker">14:00</div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="time-marker">15:00</div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="time-marker">16:00</div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="time-marker">17:00</div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="time-marker">18:00</div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="time-marker">19:00</div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="time-marker">20:00</div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="time-marker">21:00</div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="time-marker">22:00</div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="time-marker">23:00</div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-          <div class="spacer"></div>
-        </div>
 
-        <div class="days">
-          <div class="day mon">
-            <div class="date">
-              {% if date1 == currentday %}
-                <p class="date-day1">Monday</p>
-                <p class="date-num1">{{ date1|date:"d-m" }}</p>
-              {% else %}
-                <p class="date-day">Monday</p>
-                <p class="date-num">{{ date1|date:"d-m" }}</p>
-              {% endif %}
-            </div>
-            <div class="events">
-              {% for x in monday %}
-                <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} appointment"> 
-                  <p class="title">{{ x.name }}</p>
-                  <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
-                </div>
-              {% endfor %}
-            </div>
-          </div>
-          <div class="day tue">
-            <div class="date">
-              {% if date2 == currentday %}
-                <p class="date-day1">Tuesday</p>
-                <p class="date-num1">{{ date2|date:"d-m" }}</p>
-              {% else %}
-                <p class="date-day">Tuesday</p>
-                <p class="date-num">{{ date2|date:"d-m" }}</p>
-             {% endif %}
-            </div>
-            <div class="events">
-              {% for x in tuesday %}
-                <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} appointment"> 
-                  <p class="title">{{ x.name }}</p>
-                  <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
-                </div>
-              {% endfor %}
-            </div>
-          </div>
-          <div class="day wed">
-            <div class="date">
-              {% if date3 == currentday %}
-                <p class="date-day1">Wednesday</p>
-                <p class="date-num1">{{ date3|date:"d-m" }}</p>
-              {% else %}
-                <p class="date-day">Wednesday</p>
-                <p class="date-num">{{ date3|date:"d-m" }}</p>
-              {% endif %}
-            </div>
-            <div class="events">
-              {% for x in wednesday %}
-                <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} appointment"> 
-                  <p class="title">{{ x.name }}</p>
-                  <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
-                </div>
-              {% endfor %}
-            </div>
-          </div>
-          <div class="day thu">
-            <div class="date">
-              {% if date4 == currentday %}
-                <p class="date-day1">Thursday</p>
-                <p class="date-num1">{{ date4|date:"d-m" }}</p>
-              {% else %}
-                <p class="date-day">Thursday</p>
-                <p class="date-num">{{ date4|date:"d-m" }}</p>
-              {% endif %}
-            </div>
-            <div class="events">
-              {% for x in thursday %}
-                <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} appointment">
-                  <p class="title">{{ x.name }}</p>
-                  <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
-                </div>
-              {% endfor %}
-            </div>
-          </div>
-          <div class="day fri">
-            <div class="date">
-              {% if date5 == currentday %}
-              <p class="date-day1">Friday</p>
-              <p class="date-num1">{{ date5|date:"d-m" }}</p>
-              {% else %}
-                <p class="date-day">Friday</p>
-                <p class="date-num">{{ date5|date:"d-m" }}</p>
-              {% endif %}
-            </div>
-            <div class="events">
-              {% for x in friday %}
-                <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} appointment"> 
-                  <p class="title">{{ x.name }}</p>
-                  <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
-                </div>
-              {% endfor %}
-          </div>
-        </div>
-          <div class="day sat">
-            <div class="date">
-              {% if date6 == currentday %}
-                <p class="date-day1">Saturday</p>
-                <p class="date-num1">{{ date6|date:"d-m" }}</p>
-              {% else %}
-                <p class="date-day">Saturday</p>
-                <p class="date-num">{{ date6|date:"d-m" }}</p>
-              {% endif %}
-            </div>
-            <div class="events">
-              {% for x in saturday %}
-                <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} appointment"> 
-                  <p class="title">{{ x.name }}</p>
-                  <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
-                </div>
-              {% endfor %}
-          </div>
-        </div>
-          <div class="day sun">
-            <div class="date">
-              {% if date7 == currentday %}
-                <p class="date-day1">Sunday</p>
-                <p class="date-num1">{{ date7|date:"d-m" }}</p>
-              {% else %}
-                <p class="date-day">Sunday</p>
-                <p class="date-num">{{ date7|date:"d-m" }}</p>
-              {% endif %}
 
-            </div>
-            <div class="events">
-              {% for x in sunday %}
-                <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} appointment"> 
-                  <p class="title">{{ x.name }}</p>
-                  <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
-                </div>
-              {% endfor %}
-            </div>
-          </div>
+<div class="calendar">
+  <div class="timeline">
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="time-marker">01:00</div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="time-marker">02:00</div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="time-marker">03:00</div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="time-marker">04:00</div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="time-marker">05:00</div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="time-marker">06:00</div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="time-marker">07:00</div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="time-marker">08:00</div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="time-marker">09:00</div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="time-marker">10:00</div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="time-marker">11:00</div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="time-marker">12:00</div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="time-marker">13:00</div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="time-marker">14:00</div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="time-marker">15:00</div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="time-marker">16:00</div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="time-marker">17:00</div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="time-marker">18:00</div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="time-marker">19:00</div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="time-marker">20:00</div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="time-marker">21:00</div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="time-marker">22:00</div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="time-marker">23:00</div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+  </div>
+  <div class="days">
+    <div class="day mon">
+      <div class="date">
+        {% if date1 == currentday %}
+        <p class="date-day1">Monday</p>
+        <p class="date-num1">{{ date1|date:"d-m" }}</p>
+        {% else %}
+        <p class="date-day">Monday</p>
+        <p class="date-num">{{ date1|date:"d-m" }}</p>
+        {% endif %}
+      </div>
+      <div class="events">
+        {% for x in monday %}
+        <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} appointment"> 
+          <p class="title">{{ x.name }}</p>
+          <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
+        </div>
+        {% endfor %}
+      </div>
     </div>
-    
+    <div class="day tue">
+      <div class="date">
+        {% if date2 == currentday %}
+        <p class="date-day1">Tuesday</p>
+        <p class="date-num1">{{ date2|date:"d-m" }}</p>
+        {% else %}
+        <p class="date-day">Tuesday</p>
+        <p class="date-num">{{ date2|date:"d-m" }}</p>
+        {% endif %}
+      </div>
+      <div class="events">
+        {% for x in tuesday %}
+        <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} appointment"> 
+          <p class="title">{{ x.name }}</p>
+          <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="day wed">
+      <div class="date">
+        {% if date3 == currentday %}
+        <p class="date-day1">Wednesday</p>
+        <p class="date-num1">{{ date3|date:"d-m" }}</p>
+        {% else %}
+        <p class="date-day">Wednesday</p>
+        <p class="date-num">{{ date3|date:"d-m" }}</p>
+        {% endif %}
+      </div>
+      <div class="events">
+        {% for x in wednesday %}
+        <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} appointment"> 
+          <p class="title">{{ x.name }}</p>
+          <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="day thu">
+      <div class="date">
+        {% if date4 == currentday %}
+        <p class="date-day1">Thursday</p>
+        <p class="date-num1">{{ date4|date:"d-m" }}</p>
+        {% else %}
+        <p class="date-day">Thursday</p>
+        <p class="date-num">{{ date4|date:"d-m" }}</p>
+        {% endif %}
+      </div>
+      <div class="events">
+        {% for x in thursday %}
+        <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} appointment">
+          <p class="title">{{ x.name }}</p>
+          <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="day fri">
+      <div class="date">
+        {% if date5 == currentday %}
+        <p class="date-day1">Friday</p>
+        <p class="date-num1">{{ date5|date:"d-m" }}</p>
+        {% else %}
+        <p class="date-day">Friday</p>
+        <p class="date-num">{{ date5|date:"d-m" }}</p>
+        {% endif %}
+      </div>
+      <div class="events">
+        {% for x in friday %}
+        <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} appointment"> 
+          <p class="title">{{ x.name }}</p>
+          <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="day sat">
+      <div class="date">
+        {% if date6 == currentday %}
+        <p class="date-day1">Saturday</p>
+        <p class="date-num1">{{ date6|date:"d-m" }}</p>
+        {% else %}
+        <p class="date-day">Saturday</p>
+        <p class="date-num">{{ date6|date:"d-m" }}</p>
+        {% endif %}
+      </div>
+      <div class="events">
+        {% for x in saturday %}
+        <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} appointment"> 
+          <p class="title">{{ x.name }}</p>
+          <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="day sun">
+      <div class="date">
+        {% if date7 == currentday %}
+        <p class="date-day1">Sunday</p>
+        <p class="date-num1">{{ date7|date:"d-m" }}</p>
+        {% else %}
+        <p class="date-day">Sunday</p>
+        <p class="date-num">{{ date7|date:"d-m" }}</p>
+        {% endif %}
+      </div>
+      <div class="events">
+        {% for x in sunday %}
+        <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} appointment"> 
+          <p class="title">{{ x.name }}</p>
+          <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
   </div>
 </body>
 </html>

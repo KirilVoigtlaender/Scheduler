@@ -5,7 +5,7 @@ from django.db.models import Model
 class Task (models.Model):
     
     name = models.CharField(max_length=50)
-    expected_time = models.TimeField()
+    expected_time = models.DecimalField(decimal_places=2, max_digits=4)
     date = models.DateField()
     #importancy_level = models.CharField(choices=LEVEL_VALUES,max_length=50,default='Low')
     importancy_level = models.PositiveSmallIntegerField(choices=(
