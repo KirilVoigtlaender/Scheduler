@@ -730,20 +730,14 @@ ul {list-style-type: none;}
   padding: 0;
 }
 
-/* .WeeklyButton ul li {
-  color: rgb(10, 10, 10);
-  font-size: 30px;
-
-} */
-
-.WeeklyButton .prev{
-  float: left;
+.prev{
+  /* float: left; */
   /* padding: 5px; */
   
 }
 
-.WeeklyButton .next{
-  float: right;
+.next{
+  /* float: right; */
   /* padding: 5px; */
 }
 
@@ -796,37 +790,102 @@ ul {list-style-type: none;}
 }
 
 /* Style the header */
-.header {
+/* .header {
   padding: 10px 16px;
   background: #000000;
   color: #f1f1f1;
-}
+} */
 
 /* Page content */
-.content {
+/* .content {
   padding: 16px;
-}
+} */
 
 /* The sticky class is added to the header with JS when it reaches its scroll position */
-.sticky {
+/* .sticky {
   position: fixed;
   top: 0;
   width: 100%
-}
+} */
 
 /* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
-.sticky + .content {
+/* .sticky + .content {
   padding-top: 102px;
+} */
+
+
+/*Header 2.0 css*/
+body {margin:0;}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #000000;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.active {
+  background-color: #B01414;
+}
 
 </style>
 
 <head>
 <body>
 
+<ul>
+  <li><a class="active" href="#home">Home</a></li>
+  <li><a href="http://127.0.0.1:8000/" target="_blank">Edit Schedule</a></li>
+  <li><a href="#notifications">Notifictations</a></li>  <!--Can be removed if not implemented-->
+  <li><a href="#Ask for help">Ask For Help</a></li>   <!--Can be removed if not implemented-->
+        <form action="" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="weekrequest" value="last-week">
+          <li class="prev">
+          <button type="submit">Last Week</button>
+          <!-- <li><a href="previous week"> < </a></li> -->
+        </form>
+      </li>
+        <form action="" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="weekrequest" value="next-week">
+          <!-- <li><a href="next week"> > </a></li> -->
+          <li class="next"></li>
+          <button type="submit">Next Week</button>
+        </form>
+      </li>
+  </div>
+
+
+  <!-- <div class="WeeklyButton">
+    <li><a href="#previous week"> < </a></li>
+    <li><a href="#next week"> > </a></li>
+  </div> -->
+</ul>
+
+
 <!--header-->
-<div class="header sticky-top" id="myHeader">
+<!-- <div class="header sticky-top" id="myHeader">
   <div class="WeeklyButton">
     <ul>
       <li class="prev">
@@ -847,7 +906,7 @@ ul {list-style-type: none;}
 
   <div class="AddTask">
   </div>
-</div>
+</div> -->
 
 <!--Calendar-->
 <div class="calendar">
