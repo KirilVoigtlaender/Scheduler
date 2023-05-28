@@ -730,16 +730,28 @@ ul {list-style-type: none;}
   padding: 0;
 }
 
+
+.next{
+  float: right;
+  padding: 8px;
+}
+
 .prev{
-  /* float: left; */
-  /* padding: 5px; */
+  float: left;
+  padding: 8px;
   
 }
 
-.next{
-  /* float: right; */
-  /* padding: 5px; */
+.Buttons{
+  float: right;
+  width: 7%;
 }
+
+
+
+/* .navbar a.right {
+  float: right;
+} */
 
 /* Use a media query to add a break point at 800px: */
 @media only screen and (min-width: 769px) {
@@ -794,7 +806,7 @@ ul {list-style-type: none;}
   padding: 10px 16px;
   background: #000000;
   color: #f1f1f1;
-} */
+} */ */
 
 /* Page content */
 /* .content {
@@ -809,7 +821,7 @@ ul {list-style-type: none;}
 } */
 
 /* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
-/* .sticky + .content {
+/* /* .sticky + .content {
   padding-top: 102px;
 } */
 
@@ -845,7 +857,8 @@ li a:hover:not(.active) {
 }
 
 .active {
-  background-color: #B01414;
+  background-color: #DC3545;
+;
 }
 
 </style>
@@ -858,11 +871,13 @@ li a:hover:not(.active) {
   <li><a href="http://127.0.0.1:8000/" target="_blank">Edit Schedule</a></li>
   <li><a href="#notifications">Notifictations</a></li>  <!--Can be removed if not implemented-->
   <li><a href="#Ask for help">Ask For Help</a></li>   <!--Can be removed if not implemented-->
+      <div class="Buttons">
         <form action="" method="post">
           {% csrf_token %}
           <input type="hidden" name="weekrequest" value="last-week">
           <li class="prev">
-          <button type="submit">Last Week</button>
+          <!-- <button type="submit"> < </button> -->
+          <button class="btn btn-danger navbar-btn"> < </button>
           <!-- <li><a href="previous week"> < </a></li> -->
         </form>
       </li>
@@ -870,18 +885,22 @@ li a:hover:not(.active) {
           {% csrf_token %}
           <input type="hidden" name="weekrequest" value="next-week">
           <!-- <li><a href="next week"> > </a></li> -->
-          <li class="next"></li>
-          <button type="submit">Next Week</button>
+          <li class="next">
+          <!-- <button type="submit"> > </button> -->
+          <button class="btn btn-danger navbar-btn"> > </button>
         </form>
       </li>
   </div>
+</div>
+
+</ul>
 
 
   <!-- <div class="WeeklyButton">
     <li><a href="#previous week"> < </a></li>
     <li><a href="#next week"> > </a></li>
   </div> -->
-</ul>
+
 
 
 <!--header-->
