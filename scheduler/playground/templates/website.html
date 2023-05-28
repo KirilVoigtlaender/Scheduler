@@ -11,7 +11,7 @@
 :root {
   --numDays: 7;
   --numHours: 95;
-  --timeHeight: 60px; /*100 */
+  --timeHeight: 30px; /*100 */
   --calBgColor: #ffffff;
   --calBgBorderColor: #000000;
   --eventBorderColor: #000000;
@@ -29,7 +29,7 @@
   gap:25px;
   /* grid-template-columns: max-content max-content max-content max-content max-content max-content max-content; */
   grid-template-columns: auto 1fr;
-  margin: 10rem; /*The size of the schedule*/
+  margin: 8rem; /*The size of the schedule*/
 }
 
 .timeline {
@@ -43,8 +43,7 @@
   grid-column: 2;
   gap: 5px;
   /* grid-template-columns: max-content max-content max-content max-content max-content max-content max-content ; */
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-
+  grid-template-columns: repeat(auto-fit, minmax(10%, 1fr));
 }
 
 .events {
@@ -659,7 +658,7 @@
 
 /*The height of the dates*/
 .date {
-  height: 120px
+  height: 50px
 }
 
 
@@ -684,43 +683,46 @@ body {
 /*Weekday place*/
 .date {
   display: flex;
-  gap: 0.8em;
+  /* gap: 0.1em; */
+  gap: 1px;
 }
 
 /*DateNumber place */
 .date-num {
-  font-size: 2rem;
+  font-size: 1rem;
   font-weight: 500;
   display: inline;
+  margin: 5px;
 }
 
 /*Current day*/
 .date-num1 {
-  font-size: 2rem;
+  font-size: 1rem;
   font-weight: 1000;
   display: inline;
+  margin: 5px;
 }
 
 /*Weekday place*/
 .date-day {
   display: inline;
-  font-size: 2rem;
+  font-size: 1rem;
   font-weight: 500;
+  margin: 5px;
+
 }
 
 .date-day1 {
   display: inline;
-  font-size: 2rem;
+  font-size: 1rem;
   font-weight: 1000;
 }
 
 ul {list-style-type: none;}
 
-
 .WeeklyButton {
-  padding: 70px 25px;
-  width: 11.5%;
-
+  padding: 30px 2px;
+  width: 12%;
 }
 
 .WeeklyButton ul {
@@ -735,61 +737,119 @@ ul {list-style-type: none;}
 } */
 
 .WeeklyButton .prev{
-  padding: 10px;
   float: left;
-
+  /* padding: 5px; */
+  
 }
 
 .WeeklyButton .next{
-  padding: 10px;
   float: right;
-  
+  /* padding: 5px; */
+}
+
+/* Use a media query to add a break point at 800px: */
+@media only screen and (min-width: 769px) {
+  .days {
+  display: grid;
+  grid-column: 2;
+  gap: 5px;
+  /* grid-template-columns: max-content max-content max-content max-content max-content max-content max-content ; */
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+}
+
+/*Weekday place*/
+.date {
+  display: flex;
+  gap: 1px;
+}
+
+/*DateNumber place */
+.date-num {
+  font-size: 0.7rem;
+  font-weight: 500;
+  display: inline;
+  margin: 5px;
+}
+
+/*Current day*/
+.date-num1 {
+  font-size: 0.7rem;
+  font-weight: 1000;
+  display: inline;
+  margin: 5px;
+}
+
+/*Weekday place*/
+.date-day {
+  display: inline;
+  font-size: 0.7rem;
+  font-weight: 500;
+  margin: 5px;
 
 }
 
-/* Use a media query to add a breakpoint at 800px: */
-@media only screen and (max-width: 1024px) {
-    .calendar {
-    display: grid;
-    gap:25px;
-    /* grid-template-columns: max-content max-content max-content max-content max-content max-content max-content; */
-    grid-template-columns: auto 1fr;
-    margin: 10rem; /*The size of the schedule*/
-  }
+.WeeklyButton {
+  padding: 30px 2px;
+  width: 14%;
 }
 
-/* .AddTask{
-  float: right
-} */
+}
+
+/* Style the header */
+.header {
+  padding: 10px 16px;
+  background: #000000;
+  color: #f1f1f1;
+}
+
+/* Page content */
+.content {
+  padding: 16px;
+}
+
+/* The sticky class is added to the header with JS when it reaches its scroll position */
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .content {
+  padding-top: 102px;
+}
+
 
 </style>
 
 <head>
 <body>
-  <div class="con">
-<!-- <div class="container-fluid">
-  <h1>Schedule Manager</h1> 
-<div class="WeeklyButton">
-  <ul>
-    <li class="prev">
-      <form action="" method="post">
-        {% csrf_token %}
-        <input type="hidden" name="weekrequest" value="last-week">
-        <button type="submit">last week</button>
-    </form>
-    </li>
-    <li class="next">
-      <form action="" method="post">
-        {% csrf_token %}
-        <input type="hidden" name="weekrequest" value="next-week">
-        <button type="submit">next week</button>
-    </form>
-    </li>
-</div> -->
 
+<!--header-->
+<div class="header sticky-top" id="myHeader">
+  <div class="WeeklyButton">
+    <ul>
+      <li class="prev">
+        <form action="" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="weekrequest" value="last-week">
+          <button type="submit">Last Week</button>
+      </form>
+      </li>
+      <li class="next">
+        <form action="" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="weekrequest" value="next-week">
+          <button type="submit">Next Week</button>
+      </form>
+      </li>
+  </div>
 
+  <div class="AddTask">
+  </div>
+</div>
 
-
+<!--Calendar-->
 <div class="calendar">
   <div class="timeline">
     <div class="spacer"></div>

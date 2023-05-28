@@ -74,8 +74,37 @@ def algorithm():
     for task in len(sorted_tasks):
         for day in len(appointments_of_the_week):
             if task.date == start_of_week + timedelta(days=day):
-                
-    
+                tasktime = float(task.expected_time)/15
+                while True:
+                    max_free_day, timefree = 0, 0
+                    for days in day:
+                        if freetime[days] > timefree:
+                            max_free_day, timefree = days, freetime[days]
+                    
+                    if tasktime >= 2:
+                        task_slots = 2
+                    else:
+                        task_slots = 1
+                    start_slot = None
+                    for slot in range(96 - task_slots + 1):  # Iterate over all possible starting slots
+                        if all(not filled_schedule[slot+i][max_free_day] for i in range(task_slots)):
+                            start_slot = slot
+                            break
+                            
+                    # Update the filled_schedule array to mark the time slots as occupied
+                    for slot in range(start_slot, start_slot + task_slots):
+                        filled_schedule[slot][max_free_day] = task.name
+
+                    # Update the freetime array to subtract the occupied time slots
+                    freetime[max_free_day] =- task_slots * 15
+
+                    tasktime =- task_slots
+                    if tasktime <= 0:
+                        break
+                    
+                    
+
+                    
 # how many extra assingments we give on a day so that the average 
 #  per day is equal almost
 # and then need to find a way to put it imnto the schedule
