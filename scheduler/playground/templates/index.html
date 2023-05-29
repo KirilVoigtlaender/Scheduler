@@ -1,5 +1,24 @@
 {% load static %}
 <!DOCTYPE html>
+
+<style>
+
+/*Go home button styling*/
+.Back_Button {
+  position: fixed;
+  right: 10px; bottom: 10px;
+  padding: 30px;
+}
+
+
+</style>
+
+
+<!--Go back to home button-->
+<div class="Back_Button">
+  <a href="http://127.0.0.1:8000/website/" class="btn btn-danger" role="button">Home</a>
+</div>
+
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -15,7 +34,7 @@
     <div class="container">
       <div class="px-5 my-5 text-center">
         <h1>Edit Schedule</h1>
-        <p>A sample project that shows how to support modal forms with Django+HTMX with minimal JavaScript code.</p>
+        <!-- <p>A sample project that shows how to support modal forms with Django+HTMX with minimal JavaScript code.</p> -->
       </div>
       <table class="table task ">
         <thead>
