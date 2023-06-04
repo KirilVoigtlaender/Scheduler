@@ -173,26 +173,26 @@ def website(request):
     for task in to_schedule:
         if task.date == current_week[1]:
             tuesdaytasks.append(task)
-    wendsdaytasks = []
+    wednesdaytasks = []
     for task in to_schedule:
         if task.date == current_week[2]:
-           wendsdaytasks.append(task)
+           wednesdaytasks.append(task)
     thursdaytasks =[]
     for task in to_schedule:
         if task.date == current_week[3]:
             thursdaytasks.append(task)
-    fridaystask = []
+    fridaytasks = []
     for task in to_schedule:
         if task.date == current_week[4]:
-            fridaystask.append(task)
-    saturdaystask = []
+            fridaytasks.append(task)
+    saturdaytasks = []
     for task in to_schedule:
         if task.date == current_week[5]:
-            saturdaystask.append(task)
-    sundaytask = []
+            saturdaytasks.append(task)
+    sundaytasks = []
     for task in to_schedule:
         if task.date == current_week[6]:
-            sundaytask.append(task)
+            sundaytasks.append(task)
 
 
 
@@ -200,19 +200,19 @@ def website(request):
     template = loader.get_template('website.html')
     context = {
         'monday': monday, 
-        'monday' : mondaytasks,
+        'mondaytasks' : mondaytasks,
         'tuesday': tuesday,
-        'tuesday': tuesdaytasks,
+        'tuesdaytasks': tuesdaytasks,
         'wednesday': wednesday,
-        'wednesday': wendsdaytasks,
+        'wednesdaytasks': wednesdaytasks,
         'thursday': thursday,
-        'thursday': thursdaytasks,
+        'thursdaytasks': thursdaytasks,
         'friday': friday,
-        'friday': fridaystask,
+        'fridaytasks': fridaytasks,
         'saturday': saturday,
-        'saturday': saturdaystask,
+        'saturdaytasks': saturdaytasks,
         'sunday': sunday,
-        'sunday': sundaytask,
+        'sundaytasks': sundaytasks,
         'currentday' : date.today(),
         'date1' : current_week[0],
         'date2' : current_week[1],

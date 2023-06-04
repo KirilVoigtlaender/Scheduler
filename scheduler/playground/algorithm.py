@@ -1,5 +1,5 @@
 from .models import Task, Appointment
-from datetime import date, timedelta, datetime
+from datetime import date, timedelta, datetime, time
 
 def algorithm():
     today = date.today()
@@ -57,8 +57,8 @@ def algorithm():
         start_time_value = start_minutes_since_midnight // 15
         end_time_value = end_minutes_since_midnight // 15
 
-        for time in range(start_time_value, end_time_value):
-            filled_schedule[apt_weekday][time] = True
+        for timeslot in range(start_time_value, end_time_value):
+            filled_schedule[apt_weekday][timeslot] = True
         #Now we know the free time of the week to work
 
                 
@@ -78,8 +78,8 @@ def algorithm():
     freetime = []
     for day in range(7):
         freeminutes = 0
-        for time in range(96):
-            if  filled_schedule[day][time] == False:
+        for timeslot in range(96):
+            if  filled_schedule[day][timeslot] == False:
                 freeminutes = freeminutes + 15
         freetime.append(freeminutes)
         #print( "Amountof minutes:", freeminutes)
@@ -141,16 +141,24 @@ def algorithm():
         slot = 0
         while slot < len(filled_schedule[day]):
             if not(filled_schedule[day][slot] == True) and not(filled_schedule[day][slot] == False):
-                starting_point = timedelta(minutes=slot*15)
-                ending_point = timedelta(minutes=slot*15+15)
+                #starting_point = datetime.time(slot//4, slot%4*15, 0) 
+                starting_time = datetime(2000,1,1) + timedelta(minutes=slot * 15)
+                #+ timedelta(minutes=slot * 15)).strftime("%H:%M")
+                ending_time = datetime(2000,1,1) + timedelta(minutes=slot * 15 + 15)
                 for endslot in range(slot+1,len(filled_schedule[day])):
                     if filled_schedule[day][slot] == filled_schedule[day][endslot]:
                         slot = slot+1
-                        ending_point = timedelta(minutes=endslot*15+15)
+                        #ending_point_str = 
+                        #ending_point = time(0, 0, 0) + timedelta(minutes=slot * 15 + 15)
+                        #ending_point = timedelta(minutes=endslot*15+15)
+                        #ending_point_time = datetime.strptime(ending_point_str, "%H:%M").time()
+                        ending_time = datetime(2000,1,1) + timedelta(minutes=slot * 15 + 15)
+                # starting_datetime = datetime.combine(start_of_week + timedelta(days=day), starting_time)
+                # ending_datetime = datetime.combine(start_of_week + timedelta(days=day), ending_time)
                 appointment = Appointment()
                 appointment.name = filled_schedule[day][slot]  # Replace with the appropriate value
-                appointment.start_time = starting_point  # Replace with the appropriate value
-                appointment.end_time = ending_point  # Replace with the appropriate value
+                appointment.start_time = starting_time.time()
+                appointment.end_time = ending_time.time()
                 appointment.date = start_of_week + timedelta(days=day)  # Replace with the appropriate value
                 appointment.repetition = 1  # Replace with the appropriate repetition value
                 to_schedule.append(appointment) 
@@ -178,3 +186,6 @@ def algorithm():
         #while computed time is already taken, compute a new time
         
  
+
+
+   
