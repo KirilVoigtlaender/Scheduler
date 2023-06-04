@@ -1,4 +1,4 @@
-from models import Task, Appointment
+from .models import Task, Appointment
 from datetime import date, timedelta, datetime
 
 def algorithm():
@@ -16,11 +16,9 @@ def algorithm():
     #first block going from 0-6 for the days monday-sunday
     #second block has 0-95 entrys for going in 15 minutes block over the while day
     #False if time is free, True otherwise. Starts with full False
-    filled_schedule = [[[False]*96]*7] #of one week, at the end of the week we set it to all false again
+    filled_schedule = [[[False]*96] for _ in range(7)] #of one week, at the end of the week we set it to all false again
 
-    for row in filled_schedule:
-        for element in row:
-            print(element)
+    
     #Fill the array with the appointments and scheduled appointments from Uni
     appointments_of_the_week = Appointment.objects.filter(date__gt = start_of_week, date__lt = end_of_week)
 
@@ -45,13 +43,17 @@ def algorithm():
         end_time_value = end_minutes_since_midnight // 15
 
         for time in range(start_time_value, end_time_value):
-            filled_schedule[time][apt_weekday] = True
+            filled_schedule[apt_weekday][time] = True
         #Now we know the free time of the week to work
 
-    #Maybe know we should define the sleeping time, lets say from 23:00 to 7:00
+
+    #Maybe now we should define the sleeping time, lets say from 23:00 to 7:00
     for day in range(7):
-        for time in range(23*60//15, 7*60//15):
-            filled_schedule[time][day] = True
+        for slot in range (len(filled_schedule[day])):
+            if(slot<= 7*4):
+                filled_schedule[day][slot] = True
+            if(slot>= 23*4):
+                filled_schedule[day][slot] = True
 
 
     sorted_tasks = sorted(Task.objects.filter(date__gt = today), key=lambda x: (-x.importancy_level,x.date))
@@ -63,16 +65,16 @@ def algorithm():
 
     # Calculate how much freetime you have on each day of the week
     freetime = []
-    for day in len(appointments_of_the_week):
+    for day in range(len(appointments_of_the_week)):
         freeminutes = 0
-        for time in len(appointments_of_the_week[0]):
-            if not filled_schedule[time][day]:
+        for time in range(len(appointments_of_the_week[0])):
+            if not filled_schedule[day][time]:
                 freeminutes =+ 15
         freetime.append(freeminutes)
 
     
-    for task in len(sorted_tasks):
-        for day in len(appointments_of_the_week):
+    for task in range(len(sorted_tasks)):
+        for day in range(len(appointments_of_the_week)):
             if task.date == start_of_week + timedelta(days=day):
                 tasktime = float(task.expected_time)/15
                 while True:
@@ -87,13 +89,13 @@ def algorithm():
                         task_slots = 1
                     start_slot = None
                     for slot in range(96 - task_slots + 1):  # Iterate over all possible starting slots
-                        if all(not filled_schedule[slot+i][max_free_day] for i in range(task_slots)):
+                        if all(not filled_schedule[max_free_day][slot+i] for i in range(task_slots)):
                             start_slot = slot
                             break
                             
                     # Update the filled_schedule array to mark the time slots as occupied
                     for slot in range(start_slot, start_slot + task_slots):
-                        filled_schedule[slot][max_free_day] = task.name
+                        filled_schedule[max_free_day][slot] = task.name
 
                     # Update the freetime array to subtract the occupied time slots
                     freetime[max_free_day] =- task_slots * 15
@@ -101,13 +103,34 @@ def algorithm():
                     tasktime =- task_slots
                     if tasktime <= 0:
                         break
-                    
-                    
+  
+    to_schedule = []
+    for day in range(len(filled_schedule)):
+        for slot in range(len(filled_schedule[day])):
+            if not(filled_schedule[day][slot] == True) and not(filled_schedule[day][slot] == False):
+                starting_point = timedelta(minutes=slot*15)
+                ending_point = timedelta(minutes=slot*15+15)
+                for endslot in range(slot+1,len(filled_schedule[day])):
+                    if filled_schedule[day][slot] == filled_schedule[day][endslot]:
+                        slot = slot+1
+                        ending_point = timedelta(minutes=endslot*15+15)
+                appointment = Appointment()
+                appointment.name = filled_schedule[day][slot]  # Replace with the appropriate value
+                appointment.start_time = starting_point  # Replace with the appropriate value
+                appointment.end_time = ending_point  # Replace with the appropriate value
+                appointment.date = day  # Replace with the appropriate value
+                appointment.repetition = 1  # Replace with the appropriate repetition value
+                to_schedule.append(appointment) 
 
+    for row in filled_schedule:
+        for element in row:
+            print(element)                
+# 0= 00:00 , 1= 0:15,2= 0:30, 3= 0:45, 4 = 1
                     
 # how many extra assingments we give on a day so that the average 
 #  per day is equal almost
 # and then need to find a way to put it imnto the schedule
+        
         
     
         #compute a good time / maybe one or many depends on the expected time

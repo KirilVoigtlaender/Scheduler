@@ -15,6 +15,8 @@ from calendarweek import CalendarWeek
 from django.utils import timezone
 from datetime import timedelta
 
+from .algorithm import algorithm
+
 
 def index(request):
     #main view with the button
@@ -150,6 +152,8 @@ def website(request):
     
     current_week = CalendarWeek().from_date(date.fromisoformat(day))
     request.session['current_week'] = day
+
+    algorithm()
 
     monday = Appointment.objects.filter(date=current_week[0]).values()
     tuesday = Appointment.objects.filter(date=current_week[1]).values()

@@ -15,7 +15,6 @@ class Task (models.Model):
     ))
 
 class Appointment(models.Model):
-    
     name = models.CharField(max_length=50)
     start_time = models.TimeField()
     end_time = models.TimeField()
@@ -27,5 +26,12 @@ class Appointment(models.Model):
         (3,"Every Week"),
         (4,"Once a month"),
     ))
+
+    #def __new__(self, name, start_time, end_time, date, repetition):
+    #    self.name = name
+    #    self.start_time = start_time
+    #    self.end_time = end_time
+    #    self.date = date
+    #    self.repetition = repetition
 
 
