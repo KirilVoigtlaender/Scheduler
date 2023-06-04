@@ -1,5 +1,7 @@
 #These are the functions for the database, which is programmed in models
 
+### MAY HAVE TO BE DELETED SINCE NON-USED WITH DJANGO ###
+
 from .models import Task, Appointment
 
 def add_task(name, expected_time, date, importancy_level):

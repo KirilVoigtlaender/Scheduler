@@ -1,15 +1,18 @@
 {% for task in task_list %}
+<!--Display all the tasks from the database to a table-->
 <tr id="task-{{ task.pk }}" class="task-row">
   <td>{{ task.name }}</td>
   <td>{{ task.expected_time }}</td>
   <td>{{ task.date }}</td>
   <td>{{ task.importancy_level }}</td>
   <td>
+    <!--Edit button-->
     <button class="btn btn-primary btn-sm" hx-get="{% url 'edit_task' pk=task.pk %}" hx-target="#dialog">Edit</button>
   </td>
   <td>
     <form hx-post="{% url 'remove_task' pk=task.id %}" hx-swap="outerHTML" hx-target="#task-{{ task.id }}">
         {% csrf_token %}
+        <!--Remove button-->
         <button type="submit" class="btn btn-danger btn-sm">Delete</button>
     </form>
 </td>

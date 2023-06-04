@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- Bootstrap CSS -->
+  <!-- Website tab title-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
   <title>Schedule Manager</title>
 </head>
-<style>
- 
 
+<!--This is the CSS code-->
+<style>
+
+/*Represents the root, or top-level, element of the HTML document*/
 :root {
-  --numDays: 7;
-  --numHours: 95;
-  --timeHeight: 30px; /*100 */
+  --numDays: 7;  
+  --numHours: 95;   /*The amount of hours (every hour + half hour + quarter hours)*/
+  --timeHeight: 30px;    /*The distance between times in the schedule*/
+  /*Colors for the schedule*/
   --calBgColor: #ffffff;
   --calBgBorderColor: #000000;
   --eventBorderColor: #000000;
@@ -20,32 +23,28 @@
   --eventTask: #FFD9C0;
 }
 
-/* .calendar-container{
-  height: 100%;
-} */
-
+/*The css part for the calendar itself*/
 .calendar {
   display: grid;
   gap:25px;
-  /* grid-template-columns: max-content max-content max-content max-content max-content max-content max-content; */
   grid-template-columns: auto 1fr;
   margin: 8rem; /*The size of the schedule*/
 }
 
+/*This makes the timeline, it makes every numHours and has a distance of the timeHeights*/
 .timeline {
   display: grid;
   grid-template-rows: repeat(var(--numHours), var(--timeHeight));
-
 }
 
 .days {
   display: grid;
   grid-column: 2;
   gap: 5px;
-  /* grid-template-columns: max-content max-content max-content max-content max-content max-content max-content ; */
-  grid-template-columns: repeat(auto-fit, minmax(10%, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(10%, 1fr)); /*Repeats the weekdays and creates columns for it*/
 }
 
+/*Creates the appointment/task blocks*/
 .events {
   display: grid;
   grid-template-rows: repeat(var(--numHours), var(--timeHeight));
@@ -54,125 +53,126 @@
   border: 1px solid var(--calBgBorderColor);
 }
 
-/*start*/
+/*Every event has a start and end time. This creates every beginning hour 
+  from 00:15 till 23:45 for every hour, half hour and quarter hour*/
 .start-time {
   grid-row-start: var(--stime);
 }
-.start-0-15 {
+.start-00-15 {
   grid-row-start: 1
 }
-.start-0-30 {
+.start-00-30 {
   grid-row-start: 2
 }
-.start-0-45 {
+.start-00-45 {
   grid-row-start: 3
 }
-.start-1-00 {
+.start-01-00 {
   grid-row-start: 4
 }
-.start-1-15 {
+.start-01-15 {
   grid-row-start: 5
 }
-.start-1-30 {
+.start-01-30 {
   grid-row-start: 6
 }
-.start-1-45 {
+.start-01-45 {
   grid-row-start: 7
 }
-.start-2-00 {
+.start-02-00 {
   grid-row-start: 8
 }
-.start-2-15 {
+.start-02-15 {
   grid-row-start: 9
 }
-.start-2-30 {
+.start-02-30 {
   grid-row-start: 10
 }
-.start-2-45 {
+.start-02-45 {
   grid-row-start: 11
 }
-.start-3-00 {
+.start-03-00 {
   grid-row-start: 12
 }
-.start-3-15 {
+.start-03-15 {
   grid-row-start: 13
 }
-.start-3-30 {
+.start-03-30 {
   grid-row-start: 14
 }
-.start-3-45 {
+.start-03-45 {
   grid-row-start: 15
 }
-.start-4-00 {
+.start-04-00 {
   grid-row-start: 16
 }
-.start-4-15 {
+.start-04-15 {
   grid-row-start: 17
 }
-.start-4-30 {
+.start-04-30 {
   grid-row-start: 18
 }
-.start-4-45 {
+.start-04-45 {
   grid-row-start: 19
 }
-.start-5-00 {
+.start-05-00 {
   grid-row-start: 20
 }
-.start-5-15 {
+.start-05-15 {
   grid-row-start: 21
 }
-.start-5-30 {
+.start-05-30 {
   grid-row-start: 22
 }
-.start-5-45 {
+.start-05-45 {
   grid-row-start: 23
 }
-.start-6-00 {
+.start-06-00 {
   grid-row-start: 24
 }
-.start-6-15 {
+.start-06-15 {
   grid-row-start: 25
 }
-.start-6-30 {
+.start-06-30 {
   grid-row-start: 26
 }
-.start-6-45 {
+.start-06-45 {
   grid-row-start: 27
 }
-.start-7-00 {
+.start-07-00 {
   grid-row-start: 28
 }
-.start-7-15 {
+.start-07-15 {
   grid-row-start: 29
 }
-.start-7-30 {
+.start-07-30 {
   grid-row-start: 30
 }
-.start-7-45 {
+.start-07-45 {
   grid-row-start: 31
 }
-.start-8-00 {
+.start-08-00 {
   grid-row-start: 32
 }
-.start-8-15 {
+.start-08-15 {
   grid-row-start: 33
 }
-.start-8-30 {
+.start-08-30 {
   grid-row-start: 34
 }
-.start-8-45 {
+.start-08-45 {
   grid-row-start: 35
 }
-.start-9-00 {
+.start-09-00 {
   grid-row-start: 36
 }
-.start-9-15 {
+.start-09-15 {
   grid-row-start: 37
 }
-.start-9-30 {
+.start-09-30 {
   grid-row-start: 38
 }
-.start-9-45 {
+.start-09-45 {
   grid-row-start: 39
 }
 .start-10-00 {
@@ -344,128 +344,126 @@
   grid-row-start: 95
 }
 
-
-
-
-/*end*/
+/*Every event has a start and end time. This creates every ending hour 
+  from 00:15 till 23:45 for every hour, half hour and quarter hour*/
 .end-time {
   grid-row-end: var(--etime);
 }
-.end-0-15 {
+.end-00-15 {
   grid-row-end: 1
 }
-.end-0-30 {
+.end-00-30 {
   grid-row-end: 2
 }
-.end-0-45 {
+.end-00-45 {
   grid-row-end: 3
 }
-.end-1-00 {
+.end-01-00 {
   grid-row-end: 4
 }
-.end-1-15 {
+.end-01-15 {
   grid-row-end: 5
 }
-.end-1-30 {
+.end-01-30 {
   grid-row-end: 6
 }
-.end-1-45 {
+.end-01-45 {
   grid-row-end: 7
 }
-.end-2-00 {
+.end-02-00 {
   grid-row-end: 8
 }
-.end-2-15 {
+.end-02-15 {
   grid-row-end: 9
 }
-.end-2-30 {
+.end-02-30 {
   grid-row-end: 10
 }
-.end-2-45 {
+.end-02-45 {
   grid-row-end: 11
 }
-.end-3-00 {
+.end-03-00 {
   grid-row-end: 12
 }
-.end-3-15 {
+.end-03-15 {
   grid-row-end: 13
 }
-.end-3-30 {
+.end-03-30 {
   grid-row-end: 14
 }
-.end-3-45 {
+.end-03-45 {
   grid-row-end: 15
 }
-.end-4-00 {
+.end-04-00 {
   grid-row-end: 16
 }
-.end-4-15 {
+.end-04-15 {
   grid-row-end: 17
 }
-.end-4-30 {
+.end-04-30 {
   grid-row-end: 18
 }
-.end-4-45 {
+.end-04-45 {
   grid-row-end: 19
 }
-.end-5-00 {
+.end-05-00 {
   grid-row-end: 20
 }
-.end-5-15 {
+.end-05-15 {
   grid-row-end: 21
 }
-.end-5-30 {
+.end-05-30 {
   grid-row-end: 22
 }
-.end-5-45 {
+.end-05-45 {
   grid-row-end: 23
 }
-.end-6-00 {
+.end-06-00 {
   grid-row-end: 24
 }
-.end-6-15 {
+.end-06-15 {
   grid-row-end: 25
 }
-.end-6-30 {
+.end-06-30 {
   grid-row-end: 26
 }
-.end-6-45 {
+.end-06-45 {
   grid-row-end: 27
 }
-.end-7-00 {
+.end-07-00 {
   grid-row-end: 28
 }
-.end-7-15 {
+.end-07-15 {
   grid-row-end: 29
 }
-.end-7-30 {
+.end-07-30 {
   grid-row-end: 30
 }
-.end-7-45 {
+.end-07-45 {
   grid-row-end: 31
 }
-.end-8-00 {
+.end-08-00 {
   grid-row-end: 32
 }
-.end-8-15 {
+.end-08-15 {
   grid-row-end: 33
 }
-.end-8-30 {
+.end-08-30 {
   grid-row-end: 34
 }
-.end-8-45 {
+.end-08-45 {
   grid-row-end: 35
 }
-.end-9-00 {
+.end-09-00 {
   grid-row-end: 36
 }
-.end-9-15 {
+.end-09-15 {
   grid-row-end: 37
 }
-.end-9-30 {
+.end-09-30 {
   grid-row-end: 38
 }
-.end-9-45 {
+.end-09-45 {
   grid-row-end: 39
 }
 .end-10-00 {
@@ -640,12 +638,13 @@
   display: none;
 }
 
-
+/*This makes the title css for an appointment/task*/
 .title {
   font-weight: 600;
   margin-bottom: 1rem;
 }
 
+/*Creates the appointment/task block*/
 .event {
   border: 1px solid var(--eventBorderColor);
   border-radius: 5px;
@@ -661,29 +660,30 @@
   height: 50px
 }
 
-
+/*This is the letter type for the website and the background color*/
 body {
   font-family: system-ui, sans-serif;
   background-color: rgb(246, 245, 245);
 }
 
+/*Color of the appointments*/
 .appointment {
   background: var(--eventAppointment);
 }
 
+/*Color of the school schedule*/
 .schedule {
   background: var(--eventSchedule);
 }
 
+/*Color of the tasks*/
 .task {
   background: var(--eventTask);
 }
 
-
 /*Weekday place*/
 .date {
   display: flex;
-  /* gap: 0.1em; */
   gap: 1px;
 }
 
@@ -709,9 +709,9 @@ body {
   font-size: 1rem;
   font-weight: 500;
   margin: 5px;
-
 }
 
+/*This is for the current day display*/
 .date-day1 {
   display: inline;
   font-size: 1rem;
@@ -720,7 +720,8 @@ body {
 
 ul {list-style-type: none;}
 
-.WeeklyButton {
+/**/
+/* .WeeklyButton {
   padding: 30px 2px;
   width: 12%;
 }
@@ -728,77 +729,123 @@ ul {list-style-type: none;}
 .WeeklyButton ul {
   margin: 0;
   padding: 0;
-}
+} */
 
-
+/*Next week button*/
 .next{
   float: right;
   padding: 8px;
 }
 
+/*Previous week button*/
 .prev{
   float: left;
   padding: 8px;
-  
 }
 
+/*Previous and next week button*/
 .Buttons{
   float: right;
-  width: 7%;
+  width: 7%; /*Distances between the buttons*/
 }
 
-
-/* Use a media query to add a break point at 800px: */
+/*A media query to add a break point at 800px
+  This is for the smaller computers, so it still keeps it form */
 @media only screen and (min-width: 769px) {
-  .days {
-  display: grid;
-  grid-column: 2;
-  gap: 5px;
-  /* grid-template-columns: max-content max-content max-content max-content max-content max-content max-content ; */
-  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    .days {
+    display: grid;
+    grid-column: 2;
+    gap: 5px;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  }
+
+  /*Weekday place*/
+  .date {
+    display: flex;
+    gap: 1px;
+  }
+
+  /*DateNumber place */
+  .date-num {
+    font-size: 0.7rem;
+    font-weight: 500;
+    display: inline;
+    margin: 5px;
+  }
+
+  /*Current day*/
+  .date-num1 {
+    font-size: 0.7rem;
+    font-weight: 1000;
+    display: inline;
+    margin: 5px;
+  }
+
+  /*Weekday place*/
+  .date-day {
+    display: inline;
+    font-size: 0.7rem;
+    font-weight: 500;
+    margin: 5px;
+  }
+
+  /* .WeeklyButton {
+    padding: 30px 2px;
+    width: 14%;
+  } */
+
+  body {margin:0;}
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #000000;
+    position: sticky;
+    top: 0;
+    width: 100%;
+  }
+
+  li {
+    float: left;
+  }
+
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  li a:hover:not(.active) {
+    background-color: #111;
+  }
+
+  .active {
+    background-color: #DC3545;
+  ;
+  }
+
+  .next{
+    float: right;
+    padding: 8px;
+  }
+
+  .prev{
+    float: left;
+    padding: 8px;
+    
+  }
+
+  .Buttons{
+    float: right;
+    width: 8%;
+  }
 }
 
-/*Weekday place*/
-.date {
-  display: flex;
-  gap: 1px;
-}
-
-/*DateNumber place */
-.date-num {
-  font-size: 0.7rem;
-  font-weight: 500;
-  display: inline;
-  margin: 5px;
-}
-
-/*Current day*/
-.date-num1 {
-  font-size: 0.7rem;
-  font-weight: 1000;
-  display: inline;
-  margin: 5px;
-}
-
-/*Weekday place*/
-.date-day {
-  display: inline;
-  font-size: 0.7rem;
-  font-weight: 500;
-  margin: 5px;
-
-}
-
-.WeeklyButton {
-  padding: 30px 2px;
-  width: 14%;
-}
-
-}
-
-
-
-/*Header css*/
+/*Navigation css*/
 body {margin:0;}
 
 ul {
@@ -828,11 +875,13 @@ li a:hover:not(.active) {
   background-color: #111;
 }
 
+/*When on a certain page, make this one red*/
 .active {
   background-color: #DC3545;
 ;
 }
 
+/*Header css*/
 .header {
   margin: 0;
   padding: 0;
@@ -842,6 +891,7 @@ li a:hover:not(.active) {
   width: 100%;
 }
 
+/*Logo css*/
 .logo {
   width: 5%;
   padding: 15px;
@@ -852,18 +902,17 @@ li a:hover:not(.active) {
   float: left;
 }
 
+/*Schedule Manager css*/
 .text {
   width: 90%;
   float: left;
   padding: 30px;
 }
-
 </style>
 
 
 
-
-
+<!--Start of the HTML code-->
 <head>
 <body>
 

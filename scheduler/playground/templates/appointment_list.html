@@ -1,4 +1,5 @@
 {% for appointment in appointment_list %}
+<!--Display all the tasks from the database to a table-->
 <tr id="appointment-{{ appointment.pk }}" class="appointment-row">
   <td>{{ appointment.name }}</td>
   <td>{{ appointment.start_time }}</td>
@@ -6,11 +7,13 @@
   <td>{{ appointment.date }}</td>
   <td>{{ appointment.repetition}}</td>
   <td>
+    <!--Edit button-->
     <button class="btn btn-primary btn-sm" hx-get="{% url 'edit_appointment' pk=appointment.pk %}" hx-target="#dialog">Edit</button>
   </td>
   <td>
     <form hx-post="{% url 'remove_appointment' pk=appointment.id %}" hx-swap="outerHTML" hx-target="#appointment-{{ appointment.id }}">
         {% csrf_token %}
+        <!--Delete button-->
         <button type="submit" class="btn btn-danger btn-sm">Delete</button>
     </form>
 </td>

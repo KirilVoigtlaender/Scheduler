@@ -153,10 +153,11 @@ def website(request):
     current_week = CalendarWeek().from_date(date.fromisoformat(day))
     request.session['current_week'] = day
 
+    to_schedule = []
     algorithm()
 
-    monday = Appointment.objects.filter(date=current_week[0]).values()
-    tuesday = Appointment.objects.filter(date=current_week[1]).values()
+    monday = Appointment.objects.filter(date=current_week[0]).values() 
+    tuesday = Appointment.objects.filter(date=current_week[1]).values() 
     wednesday = Appointment.objects.filter(date=current_week[2]).values()
     thursday = Appointment.objects.filter(date=current_week[3]).values()
     friday = Appointment.objects.filter(date=current_week[4]).values()
