@@ -139,7 +139,7 @@ def algorithm():
     to_schedule = []
     for day in range(len(filled_schedule)):
         slot = 0
-        while slot <= len(filled_schedule[day]):
+        while slot < len(filled_schedule[day]):
             if not(filled_schedule[day][slot] == True) and not(filled_schedule[day][slot] == False):
                 starting_point = timedelta(minutes=slot*15)
                 ending_point = timedelta(minutes=slot*15+15)
@@ -161,6 +161,7 @@ def algorithm():
         print(task.end_time) 
         print(task.date) 
         print(task.repetition)      
+    return to_schedule
     #print(to_schedule)
     #for day in range(7):
     #    for element in range(len(filled_schedule[day])):

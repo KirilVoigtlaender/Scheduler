@@ -1,4 +1,4 @@
-### MAY HAVE TO BE DELETED SINCE 
+### MAY HAVE TO BE DELETED SINCE NOT USED
 
 from django.urls import path
 #from . import views

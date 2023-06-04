@@ -152,27 +152,67 @@ def website(request):
     
     current_week = CalendarWeek().from_date(date.fromisoformat(day))
     request.session['current_week'] = day
-
-    to_schedule = []
-    algorithm()
+    #+ to_schedule.filter(date=current_week[0]).values()
+    #+to_schedule.filter(date=current_week[1]).values()
+    
+    to_schedule = algorithm()
 
     monday = Appointment.objects.filter(date=current_week[0]).values() 
     tuesday = Appointment.objects.filter(date=current_week[1]).values() 
-    wednesday = Appointment.objects.filter(date=current_week[2]).values()
-    thursday = Appointment.objects.filter(date=current_week[3]).values()
-    friday = Appointment.objects.filter(date=current_week[4]).values()
-    saturday = Appointment.objects.filter(date=current_week[5]).values()
-    sunday = Appointment.objects.filter(date=current_week[6]).values()
+    wednesday = Appointment.objects.filter(date=current_week[2]).values() 
+    thursday = Appointment.objects.filter(date=current_week[3]).values() 
+    friday = Appointment.objects.filter(date=current_week[4]).values() 
+    saturday = Appointment.objects.filter(date=current_week[5]).values() 
+    sunday = Appointment.objects.filter(date=current_week[6]).values() 
+
+    mondaytasks = []
+    for task in to_schedule:
+        if task.date == current_week[0]:
+            mondaytasks.append(task)
+    tuesdaytasks = []
+    for task in to_schedule:
+        if task.date == current_week[1]:
+            tuesdaytasks.append(task)
+    wendsdaytasks = []
+    for task in to_schedule:
+        if task.date == current_week[2]:
+           wendsdaytasks.append(task)
+    thursdaytasks =[]
+    for task in to_schedule:
+        if task.date == current_week[3]:
+            thursdaytasks.append(task)
+    fridaystask = []
+    for task in to_schedule:
+        if task.date == current_week[4]:
+            fridaystask.append(task)
+    saturdaystask = []
+    for task in to_schedule:
+        if task.date == current_week[5]:
+            saturdaystask.append(task)
+    sundaytask = []
+    for task in to_schedule:
+        if task.date == current_week[6]:
+            sundaytask.append(task)
+
+
+
 
     template = loader.get_template('website.html')
     context = {
-        'monday': monday,
+        'monday': monday, 
+        'monday' : mondaytasks,
         'tuesday': tuesday,
+        'tuesday': tuesdaytasks,
         'wednesday': wednesday,
+        'wednesday': wendsdaytasks,
         'thursday': thursday,
+        'thursday': thursdaytasks,
         'friday': friday,
+        'friday': fridaystask,
         'saturday': saturday,
+        'saturday': saturdaystask,
         'sunday': sunday,
+        'sunday': sundaytask,
         'currentday' : date.today(),
         'date1' : current_week[0],
         'date2' : current_week[1],

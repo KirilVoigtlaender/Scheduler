@@ -634,6 +634,7 @@
 .end-23-45 {
   grid-row-end: 95
 }
+
 .hidden {
   display: none;
 }
@@ -720,17 +721,6 @@ body {
 
 ul {list-style-type: none;}
 
-/**/
-/* .WeeklyButton {
-  padding: 30px 2px;
-  width: 12%;
-}
-
-.WeeklyButton ul {
-  margin: 0;
-  padding: 0;
-} */
-
 /*Next week button*/
 .next{
   float: right;
@@ -788,11 +778,6 @@ ul {list-style-type: none;}
     font-weight: 500;
     margin: 5px;
   }
-
-  /* .WeeklyButton {
-    padding: 30px 2px;
-    width: 14%;
-  } */
 
   body {margin:0;}
 
@@ -916,6 +901,7 @@ li a:hover:not(.active) {
 <head>
 <body>
 
+<!--This makes the header with the logo-->
 <div class="header">
   <div class="logo">
     <h2>1</h2>
@@ -925,12 +911,15 @@ li a:hover:not(.active) {
   </div>
 </div>
 
-
+<!--This is the navigation bar-->
+<!--There is a home button so you know your in the home page-->
+<!--You can also go to the edit schedule page-->
+<!--There are previous and next week buttons that will let you go through the different weeks-->
 <ul>
   <li><a class="active" href="#home">Home</a></li>
   <li><a href="http://127.0.0.1:8000/" target="_blank">Edit Schedule</a></li>
-  <li><a href="#notifications">Notifictations</a></li>  <!--Can be removed if not implemented-->
-  <li><a href="#Ask for help">Ask For Help</a></li>   <!--Can be removed if not implemented-->
+  <li><a href="#notifications">Notifictations</a></li>  
+  <li><a href="#Ask for help">Ask For Help</a></li>   
       <div class="Buttons">
         <form action="" method="post">
           {% csrf_token %}
@@ -948,10 +937,10 @@ li a:hover:not(.active) {
       </li>
   </div>
 </div>
-
 </ul>
 
-<!--Calendar-->
+<!--This represents all the times from 01-00 till 23:00 in the calendar-->
+<!--It will also not show the half hours and quarter hours in the schedule itself. That part is hidden-->
 <div class="calendar">
   <div class="timeline">
     <div class="spacer"></div>
@@ -1051,6 +1040,9 @@ li a:hover:not(.active) {
     <div class="spacer"></div>
     <div class="spacer"></div>
   </div>
+
+  <!--This represent every weekday. It also regulates the current date. 
+      So when it is thursday it represents bold to show it is that day.-->
   <div class="days">
     <div class="day mon">
       <div class="date">
@@ -1065,6 +1057,12 @@ li a:hover:not(.active) {
       <div class="events">
         {% for x in monday %}
         <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} appointment"> 
+          <p class="title">{{ x.name }}</p>
+          <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
+        </div>
+        {% endfor %}
+        {% for x in mondaytasks %}
+        <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} task"> 
           <p class="title">{{ x.name }}</p>
           <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
         </div>
@@ -1088,6 +1086,12 @@ li a:hover:not(.active) {
           <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
         </div>
         {% endfor %}
+        {% for x in tuesdaytasks %}
+        <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} task"> 
+          <p class="title">{{ x.name }}</p>
+          <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
+        </div>
+        {% endfor %}
       </div>
     </div>
     <div class="day wed">
@@ -1103,6 +1107,12 @@ li a:hover:not(.active) {
       <div class="events">
         {% for x in wednesday %}
         <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} appointment"> 
+          <p class="title">{{ x.name }}</p>
+          <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
+        </div>
+        {% endfor %}
+        {% for x in wednesdaytasks %}
+        <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} task"> 
           <p class="title">{{ x.name }}</p>
           <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
         </div>
@@ -1126,6 +1136,12 @@ li a:hover:not(.active) {
           <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
         </div>
         {% endfor %}
+        {% for x in thursdaytasks %}
+        <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} task"> 
+          <p class="title">{{ x.name }}</p>
+          <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
+        </div>
+        {% endfor %}
       </div>
     </div>
     <div class="day fri">
@@ -1141,6 +1157,12 @@ li a:hover:not(.active) {
       <div class="events">
         {% for x in friday %}
         <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} appointment"> 
+          <p class="title">{{ x.name }}</p>
+          <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
+        </div>
+        {% endfor %}
+        {% for x in fridaytask %}
+        <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} task"> 
           <p class="title">{{ x.name }}</p>
           <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
         </div>
@@ -1164,6 +1186,12 @@ li a:hover:not(.active) {
           <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
         </div>
         {% endfor %}
+        {% for x in saturdaytask %}
+        <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} task"> 
+          <p class="title">{{ x.name }}</p>
+          <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
+        </div>
+        {% endfor %}
       </div>
     </div>
     <div class="day sun">
@@ -1179,6 +1207,12 @@ li a:hover:not(.active) {
       <div class="events">
         {% for x in sunday %}
         <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} appointment"> 
+          <p class="title">{{ x.name }}</p>
+          <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
+        </div>
+        {% endfor %}
+        {% for x in sundaytask %}
+        <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} task"> 
           <p class="title">{{ x.name }}</p>
           <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
         </div>
