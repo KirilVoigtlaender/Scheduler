@@ -28,22 +28,26 @@ def algorithm():
             if(slot <= 7*4) or (slot >= 23*4):
                 filled_schedule[day][slot] = True
 
-                #-> working till here 
+               
 
     #Fill the array with the appointments and scheduled appointments from Uni
     appointments_of_the_week = Appointment.objects.filter(date__gt = start_of_week, date__lt = end_of_week)
 
     for appointment in appointments_of_the_week:
         apt_date = appointment.date
+        print(apt_date)
         apt_weekday = apt_date.weekday()
+        print(apt_weekday)
         start_time_str = appointment.start_time
+        print(start_time_str)
         end_time_str = appointment.end_time
-        
+        print(end_time_str)
+             #-> working till here 
         # Convert start time string to datetime object
-        start_time_obj = datetime.strptime(start_time_str, "%H:%M")
+        start_time_obj = start_time_str#datetime.strptime(start_time_str, "%H:%M")
 
         # Convert end time string to datetime object
-        end_time_obj = datetime.strptime(end_time_str, "%H:%M")
+        end_time_obj = end_time_str#datetime.strptime(end_time_str, "%H:%M")
 
         # Calculate the number of minutes since midnight for start and end times
         start_minutes_since_midnight = start_time_obj.hour * 60 + start_time_obj.minute
@@ -67,14 +71,14 @@ def algorithm():
     
     tasks_nb = len(sorted_tasks)
     total_time = sum(task.expected_time for task in sorted_tasks)
-    avg_time_per_task = total_time/tasks_nb
+    #avg_time_per_task = total_time/tasks_nb
 
 
     # Calculate how much freetime you have on each day of the week
     freetime = []
     for day in range(len(appointments_of_the_week)):
         freeminutes = 0
-        for time in range(len(appointments_of_the_week[0])):
+        for time in range(len(appointments_of_the_week)):
             if not filled_schedule[day][time]:
                 freeminutes =+ 15
         freetime.append(freeminutes)
@@ -86,7 +90,7 @@ def algorithm():
                 tasktime = float(task.expected_time)/15
                 while True:
                     max_free_day, timefree = 0, 0
-                    for days in day:
+                    for days in range(day):
                         if freetime[days] > timefree:
                             max_free_day, timefree = days, freetime[days]
                     
