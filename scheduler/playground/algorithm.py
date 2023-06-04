@@ -61,10 +61,6 @@ def algorithm():
             filled_schedule[apt_weekday][timeslot] = True
         #Now we know the free time of the week to work
 
-                
-    
-              
-              
     
 
     sorted_tasks = sorted(Task.objects.filter(date__gte = today), key=lambda x: (-x.importancy_level,x.date))
@@ -107,7 +103,6 @@ def algorithm():
                     for slot in range(96 - task_slots + 1):  # Iterate over all possible starting slots
                         for i in range(task_slots):
                             if filled_schedule[max_free_day][slot+i] == False:
-                                
                                 start_slot = slot
                                 is_looping = False
                             #    print("Kareem says we stopped the loop.")
@@ -126,17 +121,11 @@ def algorithm():
                         print(slot, max_free_day)
 
                     # Update the freetime array to subtract the occupied time slots
-                    freetime[max_free_day] = freetime[max_free_day]- (task_slots * 15)
+                    freetime[max_free_day] = freetime[max_free_day] - (task_slots * 15)
                     tasktime = tasktime - task_slots
                     print(tasktime)
                     if tasktime <= 0:
                         break
-  
-
-
-
-
-
 
   
     to_schedule = []
@@ -182,13 +171,5 @@ def algorithm():
 # how many extra assingments we give on a day so that the average 
 #  per day is equal almost
 # and then need to find a way to put it imnto the schedule
-        
-        
-    
         #compute a good time / maybe one or many depends on the expected time
         #while computed time is already taken, compute a new time
-        
- 
-
-
-   
