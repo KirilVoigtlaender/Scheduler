@@ -16,9 +16,20 @@ def algorithm():
     #first block going from 0-6 for the days monday-sunday
     #second block has 0-95 entrys for going in 15 minutes block over the while day
     #False if time is free, True otherwise. Starts with full False
-    filled_schedule = [[[False]*96] for _ in range(7)] #of one week, at the end of the week we set it to all false again
-
+    #filled_schedule = [[[False] for _ in range(96)] for _ in range(7)] #of one week, at the end of the week we set it to all false again
+    filled_schedule = [[None] * 96 for _ in range(7)]
+    for day in range (7):
+        for slot in range (96):
+            filled_schedule[day][slot] = False 
     
+    #Maybe now we should define the sleeping time, lets say from 23:00 to 7:00
+    for day in range(7):
+        for slot, element in enumerate(filled_schedule[day]):
+            if(slot <= 7*4) or (slot >= 23*4):
+                filled_schedule[day][slot] = True
+
+                #-> working till here 
+
     #Fill the array with the appointments and scheduled appointments from Uni
     appointments_of_the_week = Appointment.objects.filter(date__gt = start_of_week, date__lt = end_of_week)
 
@@ -47,14 +58,10 @@ def algorithm():
         #Now we know the free time of the week to work
 
 
-    #Maybe now we should define the sleeping time, lets say from 23:00 to 7:00
-    for day in range(7):
-        for slot in range (len(filled_schedule[day])):
-            if(slot<= 7*4):
-                filled_schedule[day][slot] = True
-            if(slot>= 23*4):
-                filled_schedule[day][slot] = True
-
+    
+              
+              
+    
 
     sorted_tasks = sorted(Task.objects.filter(date__gt = today), key=lambda x: (-x.importancy_level,x.date))
     
@@ -122,9 +129,9 @@ def algorithm():
                 appointment.repetition = 1  # Replace with the appropriate repetition value
                 to_schedule.append(appointment) 
 
-    for row in filled_schedule:
-        for element in row:
-            print(element)                
+    for day in range(7):
+        for element in range(len(filled_schedule[day])):
+            print(filled_schedule[day][element])      
 # 0= 00:00 , 1= 0:15,2= 0:30, 3= 0:45, 4 = 1
                     
 # how many extra assingments we give on a day so that the average 
