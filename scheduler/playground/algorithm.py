@@ -1,5 +1,6 @@
 from .models import Task, Appointment
 from datetime import date, timedelta, datetime, time
+from .algorithm_functions.initialize_schedule import initialize_schedule
 
 def algorithm():
     today = date.today()
@@ -12,21 +13,8 @@ def algorithm():
     
     #Compute the schedule week by week
 
-    # two dimensional array
-    #first block going from 0-6 for the days monday-sunday
-    #second block has 0-95 entrys for going in 15 minutes block over the while day
-    #False if time is free, True otherwise. Starts with full False
-    #filled_schedule = [[[False] for _ in range(96)] for _ in range(7)] #of one week, at the end of the week we set it to all false again
-    filled_schedule = [[None] * 96 for _ in range(7)]
-    for day in range (7):
-        for slot in range (96):
-            filled_schedule[day][slot] = False 
-    
-    #Maybe now we should define the sleeping time, lets say from 23:00 to 7:00
-    for day in range(7):
-        for slot, element in enumerate(filled_schedule[day]):
-            if(slot <= 7*4) or (slot >= 23*4):
-                filled_schedule[day][slot] = True
+    unprefered_timeslots = [[0, 7*4-1], [23*4, 96-1]]
+    filled_schedule = initialize_schedule(unpreferred_timeslots)
 
                
 
