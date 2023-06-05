@@ -13,7 +13,7 @@ def algorithm():
     
     #Compute the schedule week by week
 
-    unprefered_timeslots = [[0, 7*4-1], [23*4, 96-1]]
+    unpreferred_timeslots = [[0, 7*4-1], [23*4, 96-1]]
     filled_schedule = initialize_schedule(unpreferred_timeslots)
 
                

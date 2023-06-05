@@ -2,7 +2,6 @@ from .models import Task, Appointment
 from datetime import date, timedelta, datetime, time
 from dateutil.relativedelta import relativedelta
 
-
 def reptition():
     all_appointment = Appointment.objects
     to_appointment= []
