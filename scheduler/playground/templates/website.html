@@ -1073,6 +1073,12 @@ li a:hover:not(.active) {
           <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
         </div>
         {% endfor %}
+        {% for x in mondayappointment %}
+        <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} appointment"> 
+          <p class="title">{{ x.name }}</p>
+          <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
+        </div>
+        {% endfor %}
       </div>
     </div>
     <div class="day tue">
@@ -1094,6 +1100,12 @@ li a:hover:not(.active) {
         {% endfor %}
         {% for x in tuesdaytasks %}
         <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} task"> 
+          <p class="title">{{ x.name }}</p>
+          <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
+        </div>
+        {% endfor %}
+        {% for x in tuesdayappointment %}
+        <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} appointment"> 
           <p class="title">{{ x.name }}</p>
           <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
         </div>
@@ -1123,6 +1135,12 @@ li a:hover:not(.active) {
           <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
         </div>
         {% endfor %}
+        {% for x in wednesdayappointment %}
+        <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} appointment"> 
+          <p class="title">{{ x.name }}</p>
+          <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
+        </div>
+        {% endfor %}
       </div>
     </div>
     <div class="day thu">
@@ -1144,6 +1162,12 @@ li a:hover:not(.active) {
         {% endfor %}
         {% for x in thursdaytasks %}
         <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} task"> 
+          <p class="title">{{ x.name }}</p>
+          <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
+        </div>
+        {% endfor %}
+        {% for x in thursdayappointment %}
+        <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} appointment"> 
           <p class="title">{{ x.name }}</p>
           <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
         </div>
@@ -1173,6 +1197,12 @@ li a:hover:not(.active) {
           <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
         </div>
         {% endfor %}
+        {% for x in fridayappointment %}
+        <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} appointment"> 
+          <p class="title">{{ x.name }}</p>
+          <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
+        </div>
+        {% endfor %}
       </div>
     </div>
     <div class="day sat">
@@ -1198,6 +1228,12 @@ li a:hover:not(.active) {
           <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
         </div>
         {% endfor %}
+        {% for x in saturdayappointment %}
+        <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} appointment"> 
+          <p class="title">{{ x.name }}</p>
+          <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
+        </div>
+        {% endfor %}
       </div>
     </div>
     <div class="day sun">
@@ -1219,6 +1255,12 @@ li a:hover:not(.active) {
         {% endfor %}
         {% for x in sundaytasks %}
         <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} task"> 
+          <p class="title">{{ x.name }}</p>
+          <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
+        </div>
+        {% endfor %}
+        {% for x in sundayappointment %}
+        <div class="event start-{{x.start_time|time:'H-i'}} end-{{x.end_time|time:'H-i'}} appointment"> 
           <p class="title">{{ x.name }}</p>
           <p class="time">{{ x.start_time|time:"H:i" }} - {{ x.end_time|time:"H:i" }}</p>
         </div>

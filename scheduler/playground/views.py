@@ -16,7 +16,7 @@ from django.utils import timezone
 from datetime import timedelta
 
 from .algorithm import algorithm
-
+from .repition import reptition
 
 def index(request):
     #main view with the button
@@ -156,7 +156,7 @@ def website(request):
     #+to_schedule.filter(date=current_week[1]).values()
     
     to_schedule = algorithm()
-
+    to_appointment = reptition()
     monday = Appointment.objects.filter(date=current_week[0]).values() 
     tuesday = Appointment.objects.filter(date=current_week[1]).values() 
     wednesday = Appointment.objects.filter(date=current_week[2]).values() 
@@ -194,7 +194,35 @@ def website(request):
         if task.date == current_week[6]:
             sundaytasks.append(task)
 
-
+    
+    mondayappointment = []
+    for appointment in to_appointment:
+        if appointment.date == current_week[0]:
+            mondayappointment.append(appointment)
+    tuesdayappointment = []
+    for appointment in to_appointment:
+        if appointment.date == current_week[1]:
+            tuesdayappointment.append(appointment)
+    wednesdayappointment = []
+    for appointment in to_appointment:
+        if appointment.date == current_week[2]:
+           wednesdayappointment.append(appointment)
+    thursdayappointment =[]
+    for appointment in to_appointment:
+        if appointment.date == current_week[3]:
+            thursdayappointment.append(appointment)
+    fridayappointment = []
+    for appointment in to_appointment:
+        if appointment.date == current_week[4]:
+            fridayappointment.append(appointment)
+    saturdayappointment = []
+    for appointment in to_appointment:
+        if appointment.date == current_week[5]:
+            saturdayappointment.append(appointment)
+    sundayappointment = []
+    for appointment in to_appointment:
+        if appointment.date == current_week[6]:
+            sundayappointment.append(appointment)
 
 
     template = loader.get_template('website.html')
@@ -213,6 +241,13 @@ def website(request):
         'saturdaytasks': saturdaytasks,
         'sunday': sunday,
         'sundaytasks': sundaytasks,
+        'mondayappointment': mondayappointment,
+        'tuesdayappointment': tuesdayappointment,
+        'wednesdayappointment': wednesdayappointment, 
+        'thursdayappointment': thursdayappointment,
+        'fridayappointment': fridayappointment,
+        'saturdayappointment': saturdayappointment,
+        'sundayappointment': sundayappointment,
         'currentday' : date.today(),
         'date1' : current_week[0],
         'date2' : current_week[1],

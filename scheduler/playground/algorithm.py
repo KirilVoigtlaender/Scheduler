@@ -1,78 +1,35 @@
 from .models import Task, Appointment
 from datetime import date, timedelta, datetime, time
 from .algorithm_functions.initialize_schedule import initialize_schedule
+from .algorithm_functions.fill_schedule import fill_schedule
+from .algorithm_functions.calculate_daily_freetime import calculate_daily_freetime
 
 def algorithm():
     today = date.today()
     start_of_week = today - timedelta(days=today.weekday())
     end_of_week = start_of_week + timedelta(days=6)
-    #tasks = Task.objects.filter(date__gt=today).order_by('date')  #ordered list after dates
-    #expected = Task.objects.filter(date_gt=today).order_by('expected_time') #ordered list after expected time
-    #list = []  #here we want to insert the sorted stuff ater the calculations then 
-    #date_importancy = Task.objects.filter(date__gt=today).order_by('-importancy_level', 'date')
     
-    #Compute the schedule week by week
-
-    unpreferred_timeslots = [[0, 7*4-1], [23*4, 96-1]]
-    filled_schedule = initialize_schedule(unpreferred_timeslots)
-
-               
-
-    #Fill the array with the appointments and scheduled appointments from Uni
-    appointments_of_the_week = Appointment.objects.filter(date__gte = start_of_week, date__lte = end_of_week)
-
-    for appointment in appointments_of_the_week:
-        apt_date = appointment.date
-        # print(apt_date)
-        apt_weekday = apt_date.weekday()
-        # print(apt_weekday)
-        start_time_str = appointment.start_time
-        # print(start_time_str)
-        end_time_str = appointment.end_time
-        # print(end_time_str)
-             
-        # Convert start time string to datetime object
-        start_time_obj = start_time_str#datetime.strptime(start_time_str, "%H:%M")
-
-        # Convert end time string to datetime object
-        end_time_obj = end_time_str#datetime.strptime(end_time_str, "%H:%M")
-
-        # Calculate the number of minutes since midnight for start and end times
-        start_minutes_since_midnight = start_time_obj.hour * 60 + start_time_obj.minute
-        end_minutes_since_midnight = end_time_obj.hour * 60 + end_time_obj.minute
-
-        # Calculate the corresponding values from 0 to 95 for start and end times
-        start_time_value = start_minutes_since_midnight // 15
-        end_time_value = end_minutes_since_midnight // 15
-
-        for timeslot in range(start_time_value, end_time_value):
-            filled_schedule[apt_weekday][timeslot] = True
-        #Now we know the free time of the week to work
-
+    #Specify here when your preferred working hours are, now specified as not between 0 and 7, and 23 and 24
+    unpreferred_timeslots = [[0, 7*4-1], [23*4, 24*4-1]]
     
-
-    sorted_tasks = sorted(Task.objects.filter(date__gte = today), key=lambda x: (-x.importancy_level,x.date))
+    #add appointments from repetition, make it an argument of algorithm()
+    repetition_appointments = []
     
-    #tasks_nb = len(sorted_tasks)
-    #total_time = sum(task.expected_time for task in sorted_tasks)
-    #avg_time_per_task = total_time/tasks_nb
+    #Initialize the schedule with the timeslots corrisponding to the unpreferred timeslots filled
+    initialized_schedule = initialize_schedule(unpreferred_timeslots)
 
+
+    #Fill the schedule with the appointments and scheduled appointments from Uni
+    filled_schedule = fill_schedule(start_of_week, end_of_week, initialized_schedule, repetition_appointments)
+
+    #Sort all tasks with a deadline after or on today, by importancy and date
+    sorted_tasks = sorted(Task.objects.filter(date__gte = today), key=lambda x: (-x.importancy_level, x.date))
 
     # Calculate how much freetime you have on each day of the week
-    freetime = []
-    for day in range(7):
-        freeminutes = 0
-        for timeslot in range(96):
-            if  filled_schedule[day][timeslot] == False:
-                freeminutes = freeminutes + 15
-        freetime.append(freeminutes)
-        #print( "Amountof minutes:", freeminutes)
+    freetime = calculate_daily_freetime(filled_schedule)
     
-     #-> working till here
     for task in range(len(sorted_tasks)):
-        #print("we have a task")
         for day in range(7):
-            #print("we look at this day", day)
             if sorted_tasks[task].date == start_of_week + timedelta(days=day):
                 #print(sorted_tasks[task].date.strftime)
                 tasktime = float(sorted_tasks[task].expected_time)*4

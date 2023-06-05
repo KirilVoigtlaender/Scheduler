@@ -18,4 +18,3 @@ def initialize_schedule(unpreferred_timeslots):
                 if start_slot <= slot <= end_slot:
                     filled_schedule[day][slot] = True
     return filled_schedule
-(slot <= 7*4-1) or (slot >= 23*4)
