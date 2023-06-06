@@ -29,12 +29,13 @@ def reptition():
                         to_appointment.append(new_appointment)
                         #Append it somewhere
                 if appointment.repetition == 4:
-                    for i in range (1,12):
+                    for i in range (appointment.date.month,12):
                         new_appointment = Appointment()
                         new_appointment.name = appointment.name  # Replace with the appropriate value
                         new_appointment.start_time = appointment.start_time
                         new_appointment.end_time = appointment.end_time
                         new_appointment.date = appointment.date + relativedelta(month=+i+1)  # Replace with the appropriate value
+                        print("The new appointment is at", new_appointment.date)
                         new_appointment.repetition = 1  # Replace with the appropriate repetition value
                         to_appointment.append(new_appointment)
                         #Append it somewhere
