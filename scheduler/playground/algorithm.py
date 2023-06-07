@@ -11,20 +11,18 @@ def algorithm(repetition_appointments):
     start_of_week = today - timedelta(days=today.weekday())
     end_of_week = start_of_week + timedelta(days=6)    
 
-    #Initialize the schedule with the timeslots corrisponding to the unpreferred timeslots filled
-    initialized_schedule = initialize_schedule(unpreferred_timeslots)
-    
     # Specify when your preferred working hours are; if no preferences are stored then standard sleeping time
     # between 00:00 and 07:00, and between 23:00 and 00:00 are taken.
+    unpreferred_timeslots = []
     preferences = PersonalPreference.objects.all()
     if not preferences.exists():
         unpreferred_timeslots = [[0, 7*4-1], [23*4, 24*4-1]]
-    else:
-        unpreferred_timeslots = []
 
     for interval in preferences:
-        unpreferred_timeslots.append([interval.start_time, interval.end_time])
-        print("start:", interval.start_time, "end:", interval.end_time)
+        unpreferred_timeslots.append([interval.start_time*4, interval.end_time*4-1])
+
+    #Initialize the schedule with the timeslots corrisponding to the unpreferred timeslots filled
+    initialized_schedule = initialize_schedule(unpreferred_timeslots)
 
     # Fill the schedule with the appointments and unpreferred working hours
     filled_schedule = fill_schedule(start_of_week, end_of_week, initialized_schedule, repetition_appointments)
@@ -37,9 +35,9 @@ def algorithm(repetition_appointments):
     
     # Fill the schedule with the tasks 
     filled_schedule = sort_tasks(sorted_tasks, freetime, filled_schedule, start_of_week)
-    
+
     # Turn the scheduled tasks into appointments which we can schedule in the views
     to_schedule = tasks_to_appointments(filled_schedule, start_of_week)
-   
+  
     return to_schedule
    

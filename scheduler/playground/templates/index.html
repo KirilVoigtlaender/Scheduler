@@ -79,6 +79,29 @@
       <button hx-get="{% url 'add_appointment' %}" hx-target="#dialog" class="btn btn-primary">
         Add an appointment
       </button>
+
+      <table class="table personalpreference ">
+        <!--Task table header-->
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>start_time</th>
+            <th>end_time</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody hx-trigger="load, PersonalPreferenceListChanged from:body" hx-get="{% url 'personalpreference_list' %}" hx-target="this">
+          <tr>
+            <td class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!--Add task button (load the task form pop-up)-->
+      <button hx-get="{% url 'add_personalpreference' %}" hx-target="#dialog" class="btn btn-primary">
+        Add a personalpreference
+      </button>
     </div>
 
     <!-- Placeholder for the modal -->
