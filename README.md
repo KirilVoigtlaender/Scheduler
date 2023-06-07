@@ -6,11 +6,11 @@ Our application is a website build in [Django](https://www.djangoproject.com/) t
 
 ## 💡 Table of content
 
-  1. [🏁 Features](#🏁-features)
-  2. [🔍 Overview](#🔍-overview)
-  3. [🚀 Setup](#🚀-setup)
-  4. [💾 Database](#💾-database)
-  5. [💛 Contributors](#💛-contributors)
+  1. [🏁 Features](#-features)
+  2. [🔍 Overview](#-overview)
+  3. [🚀 Setup](#-setup)
+  4. [💾 Database](#-database)
+  5. [💛 Contributors](#-contributors)
 
 ## 🏁 Features
 
