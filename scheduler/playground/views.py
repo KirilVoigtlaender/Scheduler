@@ -155,8 +155,9 @@ def website(request):
     #+ to_schedule.filter(date=current_week[0]).values()
     #+to_schedule.filter(date=current_week[1]).values()
     
-    to_schedule = algorithm()
+    
     to_appointment = reptition()
+    to_schedule = algorithm(to_appointment)
     monday = Appointment.objects.filter(date=current_week[0]).values() 
     tuesday = Appointment.objects.filter(date=current_week[1]).values() 
     wednesday = Appointment.objects.filter(date=current_week[2]).values() 

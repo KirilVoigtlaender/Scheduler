@@ -1,5 +1,5 @@
 from .models import  Appointment
-from datetime import date, timedelta, datetime, time
+from datetime import  timedelta
 from dateutil.relativedelta import relativedelta
 
 def reptition():
