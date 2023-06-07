@@ -2,8 +2,8 @@
 <!--Display all the tasks from the database to a table-->
 <tr id="appointment-{{ appointment.pk }}" class="appointment-row">
   <td>{{ appointment.name }}</td>
-  <td>{{ appointment.start_time }}</td>
-  <td>{{ appointment.end_time }}</td>
+  <td>{{ appointment.start_time|time:"H:i" }}</td>
+  <td>{{ appointment.end_time|time:"H:i" }}</td>
   <td>{{ appointment.date }}</td>
   <td>{{ appointment.repetition}}</td>
   <td>

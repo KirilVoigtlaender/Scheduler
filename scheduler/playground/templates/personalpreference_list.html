@@ -2,8 +2,8 @@
 <!--Display all the personalpreference from the database to a table-->
 <tr id="personalpreference-{{ personalpreference.pk }}" class="personalpreference-row">
   <td>{{ personalpreference.name }}</td>
-  <td>{{ personalpreference.start_time }}</td>
-  <td>{{ personalpreference.end_time}}</td>
+  <td>{{ personalpreference.start_time|time:"H:i" }}</td>
+  <td>{{ personalpreference.end_time|time:"H:i"}}</td>
   <td>
     <!--Edit button-->
     <button class="btn btn-primary btn-sm" hx-get="{% url 'edit_personalpreference' pk=personalpreference.pk %}" hx-target="#dialog">Edit</button>

@@ -19,7 +19,7 @@ def algorithm(repetition_appointments):
         unpreferred_timeslots = [[0, 7*4-1], [23*4, 24*4-1]]
 
     for interval in preferences:
-        unpreferred_timeslots.append([interval.start_time*4, interval.end_time*4-1])
+        unpreferred_timeslots.append([interval.start_time.hour*4+interval.start_time.minute/15, interval.end_time.hour*4+interval.end_time.minute/15-1])
 
     #Initialize the schedule with the timeslots corrisponding to the unpreferred timeslots filled
     initialized_schedule = initialize_schedule(unpreferred_timeslots)
