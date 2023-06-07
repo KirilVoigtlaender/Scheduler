@@ -7,8 +7,8 @@ from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404
 
 from django.template import loader
-from .models import Task,Appointment
-from .forms import AddTaskForm, AddAppointmentForm
+from .models import Task,Appointment,PersonalPreference
+from .forms import AddTaskForm, AddAppointmentForm,AddPersonalPreferencesForm
 
 from datetime import date
 from calendarweek import CalendarWeek
@@ -138,6 +138,61 @@ def remove_appointment(request, pk):
             })
         })
 
+
+
+##PersonalPrefernces ##
+def personalpreference_list(request):
+    return render(request, 'personalpreference_list.html', {
+        'personalpreference_list': PersonalPreference.objects.all(),  # Update the key to 'personalpreferences_list'
+    })
+
+def add_personalpreference(request):
+    form = AddPersonalPreferencesForm()
+    if request.method == "POST":
+        form = AddPersonalPreferencesForm(request.POST)
+        if form.is_valid():
+            personalpreference = form.save()
+            return HttpResponse(
+                status=204,
+                headers={
+                    'HX-Trigger': json.dumps({
+                        "PersonalPreferenceListChanged": None,
+                        "showMessage": f"{personalpreference.name} added."
+                    })
+                }
+            )
+    return render(request, 'personalpreference_form.html', {'form': form})
+
+def edit_personalpreference(request, pk):
+    personalpreference = get_object_or_404(PersonalPreference, pk=pk)
+    form = AddPersonalPreferencesForm(instance=personalpreference)  # Define an empty form instance
+    if request.method == 'POST':
+        form = AddPersonalPreferencesForm(request.POST, instance=personalpreference)
+        if form.is_valid():
+            form.save()
+            return HttpResponse(
+                status=204,
+                headers={
+                    'HX-Trigger': json.dumps({
+                        "PersonalPreferenceListChanged": None,
+                        "showMessage": f"{personalpreference.name} updated."
+                    })
+                }
+            )
+    return render(request, 'personalpreference_form.html', {'form': form})
+
+@ require_POST
+def remove_personalpreference(request, pk):
+    personalpreference = get_object_or_404(PersonalPreference, pk=pk)
+    personalpreference.delete()
+    return HttpResponse(
+        status=204,
+        headers={
+            'HX-Trigger': json.dumps({
+                "PersonalPreferenceListChanged": None,
+                "showMessage": f"{personalpreference.name} deleted."
+            })
+        })
 
 ## SCHEDULE ##
 def website(request):

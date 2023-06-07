@@ -1,0 +1,19 @@
+{% for personalpreference in personalpreference_list %}
+<!--Display all the personalpreference from the database to a table-->
+<tr id="personalpreference-{{ personalpreference.pk }}" class="personalpreference-row">
+  <td>{{ personalpreference.name }}</td>
+  <td>{{ personalpreference.start_time }}</td>
+  <td>{{ personalpreference.end_time}}</td>
+  <td>
+    <!--Edit button-->
+    <button class="btn btn-primary btn-sm" hx-get="{% url 'edit_personalpreference' pk=personalpreference.pk %}" hx-target="#dialog">Edit</button>
+  </td>
+  <td>
+    <form hx-post="{% url 'remove_personalpreference' pk=personalpreference.id %}" hx-swap="outerHTML" hx-target="#personalpreference-{{ personalpreference.id }}">
+        {% csrf_token %}
+        <!--Remove button-->
+        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+    </form>
+</td>
+</tr>
+{% endfor %}

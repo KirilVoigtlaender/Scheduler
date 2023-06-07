@@ -28,12 +28,10 @@ def sort_tasks(sorted_tasks, freetime, filled_schedule, start_of_week):
                     # Update the filled_schedule array to mark the time slots as occupied
                     for slot in range(start_slot, start_slot + task_slots):
                         filled_schedule[max_free_day][slot] = sorted_tasks[task].name
-                        print("here", slot, max_free_day, tasktime)
 
                     # Update the freetime array to subtract the occupied time slots
                     freetime[max_free_day] = freetime[max_free_day] - (task_slots * 15)
                     tasktime = tasktime - task_slots
-                    print(tasktime)
                     if tasktime <= 0:
                         break
     return filled_schedule

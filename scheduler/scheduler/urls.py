@@ -30,5 +30,10 @@ urlpatterns = [
     path('appointment/add', views.add_appointment, name='add_appointment'),#Appointment
     path('appointment/<int:pk>/remove', views.remove_appointment, name='remove_appointment'),#Appointment
     path('appointment/<int:pk>/edit', views.edit_appointment, name='edit_appointment'),#Appointmnet
+
+    path('personalpreference', views.personalpreference_list, name='personalpreference_list'),#Appointment
+    path('personalpreference/add', views.add_personalpreference, name='add_personalpreference'),#Appointment
+    path('personalpreference/<int:pk>/remove', views.remove_personalpreference, name='remove_personalpreference'),#Appointment
+    path('personalpreference/<int:pk>/edit', views.edit_personalpreference, name='edit_personalpreference'),#Appointmnet
     path('website/', views.website),
 ]

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Task,Appointment
+from .models import Task,Appointment,PersonalPreference
 
 ### Utility classes for the TimeField to be only every quarter ###
 class IncrementalTimeField(forms.FloatField):
@@ -29,4 +29,8 @@ class AddAppointmentForm(forms.ModelForm):
         model= Appointment
         fields = ['name', 'start_time','end_time', 'date','repetition']
         
-
+### PersonalPreferences form ###
+class AddPersonalPreferencesForm(forms.ModelForm):
+    class Meta:
+        model= PersonalPreference
+        fields = ['name','start_time', 'end_time']

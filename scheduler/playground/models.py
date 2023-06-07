@@ -25,4 +25,8 @@ class Appointment(models.Model):
     ))
 
 
-
+### Personal Preference model###
+class PersonalPreference(models.Model):
+    name = models.CharField(max_length=50)
+    start_time = models.IntegerField()
+    end_time = models.IntegerField()

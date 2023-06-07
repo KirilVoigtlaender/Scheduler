@@ -1,4 +1,4 @@
-from .models import Task
+from .models import Task, PersonalPreference
 from datetime import date, timedelta
 from .algorithm_functions.initialize_schedule import initialize_schedule
 from .algorithm_functions.fill_schedule import fill_schedule
@@ -9,18 +9,27 @@ from .algorithm_functions.tasks_to_appointments import tasks_to_appointments
 def algorithm(repetition_appointments):
     today = date.today()
     start_of_week = today - timedelta(days=today.weekday())
-    end_of_week = start_of_week + timedelta(days=6)
-    
-    #Specify here when your preferred working hours are, now specified as not between 0 and 7, and 23 and 24
-    unpreferred_timeslots = [[0, 7*4-1], [23*4, 24*4-1]]
-    
+    end_of_week = start_of_week + timedelta(days=6)    
+
     #Initialize the schedule with the timeslots corrisponding to the unpreferred timeslots filled
     initialized_schedule = initialize_schedule(unpreferred_timeslots)
+    
+    # Specify when your preferred working hours are; if no preferences are stored then standard sleeping time
+    # between 00:00 and 07:00, and between 23:00 and 00:00 are taken.
+    preferences = PersonalPreference.objects.all()
+    if not preferences.exists():
+        unpreferred_timeslots = [[0, 7*4-1], [23*4, 24*4-1]]
+    else:
+        unpreferred_timeslots = []
 
-    #Fill the schedule with the appointments and scheduled appointments from Uni
+    for interval in preferences:
+        unpreferred_timeslots.append([interval.start_time, interval.end_time])
+        print("start:", interval.start_time, "end:", interval.end_time)
+
+    # Fill the schedule with the appointments and unpreferred working hours
     filled_schedule = fill_schedule(start_of_week, end_of_week, initialized_schedule, repetition_appointments)
 
-    #Sort all tasks with a deadline after or on today, by importancy and date
+    # Sort all tasks with a deadline after or on today, by importancy and date
     sorted_tasks = sorted(Task.objects.filter(date__gte = today), key=lambda x: (-x.importancy_level, x.date))
 
     # Calculate how much freetime you have on each day of the week
