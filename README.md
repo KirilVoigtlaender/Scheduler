@@ -29,14 +29,14 @@ List of features implemented and in development:
 The website is composed of `two main parts`.
 The first one is the page that you get when you open the website.
 
-*HERE INSERT SCREENSHOT*
+![editor.png](screenshots/editor.png)
 
 This part allow the user to **edit the events** of its schedule. 
 The user can add **Appointments** *(Doctor, lecture...)* and **Tasks** *(assignments, objective with deadline...)*  to it's table. \
 You can also add your **preferences** for the scheduler, for example your sleeping time. \
 When the user clicks on the `Home` button at the bottom right, it will be able to visualize its schedule.
 
-*HERE INSERT SCREENSOT*
+![website.png](screenshots/website.png)
 
 User can go through all the weeks by click on the `Arrow` buttons on top right corner of the screen. 
 
