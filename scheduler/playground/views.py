@@ -20,12 +20,7 @@ from .repition import reptition
 def index(request):
     #main view with the button
     return render(request, 'index.html')#The same as his index.html
-#Don't know if we need this function for now
-def home(request):
-    return render(request, 'home.html')
 
-def say_hello(request):
-    return HttpResponse('hello world')
 
 
 ## TASK ##
