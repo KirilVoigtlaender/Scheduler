@@ -2,43 +2,28 @@ from .models import  Appointment
 from datetime import  timedelta
 from dateutil.relativedelta import relativedelta
 
+def repitition_handler(appointment, to_appointment, timefun, rangeval):
+    for i in range (1, rangeval):
+        new_appointment = Appointment()
+        new_appointment.name = appointment.name  
+        new_appointment.start_time = appointment.start_time
+        new_appointment.end_time = appointment.end_time
+        new_appointment.date = appointment.date + timefun * i
+        new_appointment.repetition = 1  
+        to_appointment.append(new_appointment)
+    return
+
 def reptition():
     all_appointment = Appointment.objects.all()
-
     to_appointment= []
     for appointment in all_appointment:
         if appointment.repetition != 1:
                 if appointment.repetition == 2:
-                    for i in range (1,30):
-                        new_appointment = Appointment()
-                        new_appointment.name = appointment.name  # Replace with the appropriate value
-                        new_appointment.start_time = appointment.start_time
-                        new_appointment.end_time = appointment.end_time
-                        new_appointment.date = appointment.date + timedelta(days=i)  # Replace with the appropriate value
-                        new_appointment.repetition = 1  # Replace with the appropriate repetition value
-                        to_appointment.append(new_appointment)
-                        #Append it somewhere
-                if appointment.repetition == 3:
-                    for i in range (1,52):
-                        new_appointment = Appointment()
-                        new_appointment.name = appointment.name  # Replace with the appropriate value
-                        new_appointment.start_time = appointment.start_time
-                        new_appointment.end_time = appointment.end_time
-                        new_appointment.date = appointment.date + timedelta(weeks=i)  # Replace with the appropriate value
-                        new_appointment.repetition = 1  # Replace with the appropriate repetition value
-                        to_appointment.append(new_appointment)
-                        #Append it somewhere
-                if appointment.repetition == 4:
-                    for i in range (appointment.date.month,12):
-                        new_appointment = Appointment()
-                        new_appointment.name = appointment.name  # Replace with the appropriate value
-                        new_appointment.start_time = appointment.start_time
-                        new_appointment.end_time = appointment.end_time
-                        new_appointment.date = appointment.date + relativedelta(month=+i+1)  # Replace with the appropriate value
-                        print("The new appointment is at", new_appointment.date)
-                        new_appointment.repetition = 1  # Replace with the appropriate repetition value
-                        to_appointment.append(new_appointment)
-                        #Append it somewhere
+                    repitition_handler(appointment, to_appointment, timedelta(days=1), 365)
+                elif appointment.repetition == 3:
+                    repitition_handler(appointment, to_appointment, timedelta(weeks=1), 52)
+                elif appointment.repetition == 4:
+                    repitition_handler(appointment, to_appointment, relativedelta(months=1), 12)
     return to_appointment       
 
    

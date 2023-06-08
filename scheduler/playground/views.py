@@ -12,7 +12,6 @@ from .forms import AddTaskForm, AddAppointmentForm,AddPersonalPreferencesForm
 
 from datetime import date
 from calendarweek import CalendarWeek
-from django.utils import timezone
 from datetime import timedelta
 
 from .algorithm import algorithm
@@ -87,7 +86,7 @@ def remove_task(request, pk):
 ## APPOINTMENT ##
 def appointment_list(request):
     return render(request, 'appointment_list.html', {
-        'appointment_list': Appointment.objects.all(),
+        'appointment_list': Appointment.objects.all(), # Update the key to 'appointment_list'
     })
 
 def add_appointment(request):
@@ -110,7 +109,7 @@ def add_appointment(request):
             
 def edit_appointment(request, pk):
     appointment = get_object_or_404(Appointment, pk=pk)
-    form = AddAppointmentForm(instance=appointment)
+    form = AddAppointmentForm(instance=appointment)  # Define an empty form instance
     if request.method == "POST":
         form= AddAppointmentForm(request.POST, instance=appointment)
         if form.is_valid():
@@ -207,10 +206,7 @@ def website(request):
     
     current_week = CalendarWeek().from_date(date.fromisoformat(day))
     request.session['current_week'] = day
-    #+ to_schedule.filter(date=current_week[0]).values()
-    #+to_schedule.filter(date=current_week[1]).values()
-    
-    
+        
     to_appointment = reptition()
     to_schedule = algorithm(to_appointment)
     monday = Appointment.objects.filter(date=current_week[0]).values() 
