@@ -48,6 +48,14 @@ To lauch the website on your device, you can copy this repository and use the fo
 cd scheduler
 python manage.py runserver
 ```
+To install the necessery libraries if needed you can use the following commands:
+```bash
+cd scheduler
+pipenv install django
+pipenv shell
+pip install django-widget-tweaks
+pip install python-dateutil
+```
 
 ## 💾 Database
 
