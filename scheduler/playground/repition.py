@@ -13,6 +13,7 @@ def repitition_handler(appointment, to_appointment, timefun, rangeval):
         to_appointment.append(new_appointment)
     return
 
+
 def reptition():
     all_appointment = Appointment.objects.all()
     to_appointment= []
