@@ -6,8 +6,8 @@ from .algorithm_functions.calculate_daily_freetime import calculate_daily_freeti
 from .algorithm_functions.sort_tasks import sort_tasks
 from .algorithm_functions.tasks_to_appointments import tasks_to_appointments
 
-def algorithm(repetition_appointments):
-    today = date.today()
+def algorithm(repetition_appointments, day):
+    today = day
     start_of_week = today - timedelta(days=today.weekday())
     end_of_week = start_of_week + timedelta(days=6)    
 

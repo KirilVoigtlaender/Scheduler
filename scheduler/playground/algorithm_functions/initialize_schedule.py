@@ -1,5 +1,5 @@
 def initialize_schedule(unpreferred_timeslots):
-    TIMES_SLOTS = 96
+    TIMES_SLOTS = 96 
     WEEK_DAYS = 7
     # two dimensional array
     #first block going from 0-6 for the days monday-sunday
